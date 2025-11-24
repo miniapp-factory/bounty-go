@@ -208,3 +208,37 @@
 +Ensure water flows naturally (check down, then check down-left/down-right, then left/right).
 +
 +At the end of the loop, update the ref and state to use nextGrid.
+
+# 2025-11-24 16:38:35.858959
++The water logic is glitching because of in-place updates. When a particle moves to a new cell (like x+1), the loop encounters that same particle again later in the same frame and moves it a second time (and third, etc.), causing instant teleportation.
++
++Please fix the animate function by adding a 'moved' state tracker:
++
++At the start of the animate loop, create a 2D boolean array (or a set) called hasMoved to track which pixels have already been processed this frame.
++
++Inside the loop, before processing a cell grid[y][x], check if (hasMoved[y][x]) continue;.
++
++When you successfully move a particle from (x, y) to (newX, newY):
++
++Update the grid as usual.
++
++Crucially, set hasMoved[newY][newX] = true so the loop knows to skip this particle if it encounters it again in this frame.
++
++Apply this fix to both Sand and Water logic.
+
+# 2025-11-24 16:38:35.859505
++The water logic is glitching because of in-place updates. When a particle moves to a new cell (like x+1), the loop encounters that same particle again later in the same frame and moves it a second time (and third, etc.), causing instant teleportation.
++
++Please fix the animate function by adding a 'moved' state tracker:
++
++At the start of the animate loop, create a 2D boolean array (or a set) called hasMoved to track which pixels have already been processed this frame.
++
++Inside the loop, before processing a cell grid[y][x], check if (hasMoved[y][x]) continue;.
++
++When you successfully move a particle from (x, y) to (newX, newY):
++
++Update the grid as usual.
++
++Crucially, set hasMoved[newY][newX] = true so the loop knows to skip this particle if it encounters it again in this frame.
++
++Apply this fix to both Sand and Water logic.
