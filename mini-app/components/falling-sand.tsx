@@ -28,7 +28,7 @@ export default function FallingSand() {
     let dragging = false;
 
     const getCell = (x: number, y: number) => {
-      if (x < 0 || x >= cols || y < 0 || y >= rows) return 0;
+      if (x < 0 || x >= cols || y < 0 || y >= rows) return 1;
       return grid[y][x];
     };
 
