@@ -57,26 +57,37 @@ export default function FallingSand() {
     canvas.addEventListener("mousemove", mouseMove);
 
     const animate = () => {
-      const nextGrid = grid.map(row => [...row]);
 
       for (let y = rows - 1; y >= 0; y--) {
         for (let x = 0; x < cols; x++) {
           if (grid[y][x] !== 1) continue;
 
-          if (getCell(x, y + 1) === 0) {
+          // Strict boundary check for gravity
+          if (y + 1 < rows && getCell(x, y + 1) === 0) {
             setCell(x, y + 1, 1);
             setCell(x, y, 0);
           } else {
             const leftEmpty = getCell(x - 1, y + 1) === 0;
             const rightEmpty = getCell(x + 1, y + 1) === 0;
             if (leftEmpty || rightEmpty) {
-              const moveLeft = Math.random() < 0.5;
-              if (moveLeft && leftEmpty) {
-                setCell(x - 1, y + 1, 1);
-                setCell(x, y, 0);
-              } else if (!moveLeft && rightEmpty) {
-                setCell(x + 1, y + 1, 1);
-                setCell(x, y, 0);
+              // Randomly pick side to try first
+              const tryLeftFirst = Math.random() < 0.5;
+              if (tryLeftFirst) {
+                if (leftEmpty) {
+                  setCell(x - 1, y + 1, 1);
+                  setCell(x, y, 0);
+                } else if (rightEmpty) {
+                  setCell(x + 1, y + 1, 1);
+                  setCell(x, y, 0);
+                }
+              } else {
+                if (rightEmpty) {
+                  setCell(x + 1, y + 1, 1);
+                  setCell(x, y, 0);
+                } else if (leftEmpty) {
+                  setCell(x - 1, y + 1, 1);
+                  setCell(x, y, 0);
+                }
               }
             }
           }
