@@ -100,3 +100,17 @@
 +Randomness: When checking diagonally (down-left or down-right), use Math.random() to pick which side to try first, so the pile doesn't just fall to the left.
 +
 +Keep the Bottom-Up Loop: Ensure you are still iterating for (let r = rows - 1; r >= 0; r--)."
+
+# 2025-11-24 14:22:30.656336
++There is a critical bug: The sand particles are disappearing at the bottom of the screen.
++
++This is happening because the getCell function returns 0 (Empty) when checking coordinates outside the grid.
++
++Please update the getCell function immediately: Change the logic so that if x or y are out of bounds (less than 0 or greater than rows/cols), it returns 1 (Solid). This will treat the floor and walls as solid boundaries and stop the sand from falling into the void.
+
+# 2025-11-24 14:22:30.657044
++There is a critical bug: The sand particles are disappearing at the bottom of the screen.
++
++This is happening because the getCell function returns 0 (Empty) when checking coordinates outside the grid.
++
++Please update the getCell function immediately: Change the logic so that if x or y are out of bounds (less than 0 or greater than rows/cols), it returns 1 (Solid). This will treat the floor and walls as solid boundaries and stop the sand from falling into the void.
