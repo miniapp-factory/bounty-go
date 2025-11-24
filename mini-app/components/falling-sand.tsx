@@ -60,37 +60,66 @@ export default function FallingSand() {
 
       for (let y = rows - 1; y >= 0; y--) {
         for (let x = 0; x < cols; x++) {
-          if (grid[y][x] !== 1) continue;
-
-          // Strict boundary check for gravity
-          if (y + 1 < rows && getCell(x, y + 1) === 0) {
-            setCell(x, y + 1, 1);
-            setCell(x, y, 0);
-          } else {
-            const leftEmpty = getCell(x - 1, y + 1) === 0;
-            const rightEmpty = getCell(x + 1, y + 1) === 0;
-            if (leftEmpty || rightEmpty) {
-              // Randomly pick side to try first
-              const tryLeftFirst = Math.random() < 0.5;
-              if (tryLeftFirst) {
-                if (leftEmpty) {
-                  setCell(x - 1, y + 1, 1);
-                  setCell(x, y, 0);
-                } else if (rightEmpty) {
-                  setCell(x + 1, y + 1, 1);
-                  setCell(x, y, 0);
-                }
-              } else {
-                if (rightEmpty) {
-                  setCell(x + 1, y + 1, 1);
-                  setCell(x, y, 0);
-                } else if (leftEmpty) {
-                  setCell(x - 1, y + 1, 1);
-                  setCell(x, y, 0);
+          const cell = grid[y][x];
+          if (cell === 1) {
+            // Sand logic
+            if (y + 1 < rows && getCell(x, y + 1) === 0) {
+              setCell(x, y + 1, 1);
+              setCell(x, y, 0);
+            } else {
+              const leftEmpty = getCell(x - 1, y + 1) === 0;
+              const rightEmpty = getCell(x + 1, y + 1) === 0;
+              if (leftEmpty || rightEmpty) {
+                const tryLeftFirst = Math.random() < 0.5;
+                if (tryLeftFirst) {
+                  if (leftEmpty) {
+                    setCell(x - 1, y + 1, 1);
+                    setCell(x, y, 0);
+                  } else if (rightEmpty) {
+                    setCell(x + 1, y + 1, 1);
+                    setCell(x, y, 0);
+                  }
+                } else {
+                  if (rightEmpty) {
+                    setCell(x + 1, y + 1, 1);
+                    setCell(x, y, 0);
+                  } else if (leftEmpty) {
+                    setCell(x - 1, y + 1, 1);
+                    setCell(x, y, 0);
+                  }
                 }
               }
             }
-          }
+          } else if (cell === 2) {
+            // Water logic
+            if (y + 1 < rows && getCell(x, y + 1) === 0) {
+              setCell(x, y + 1, 2);
+              setCell(x, y, 0);
+            } else {
+              const leftEmpty = getCell(x - 1, y) === 0;
+              const rightEmpty = getCell(x + 1, y) === 0;
+              if (leftEmpty || rightEmpty) {
+                const tryLeftFirst = Math.random() < 0.5;
+                if (tryLeftFirst) {
+                  if (leftEmpty) {
+                    setCell(x - 1, y, 2);
+                    setCell(x, y, 0);
+                  } else if (rightEmpty) {
+                    setCell(x + 1, y, 2);
+                    setCell(x, y, 0);
+                  }
+                } else {
+                  if (rightEmpty) {
+                    setCell(x + 1, y, 2);
+                    setCell(x, y, 0);
+                  } else if (leftEmpty) {
+                    setCell(x - 1, y, 2);
+                    setCell(x, y, 0);
+                  }
+                }
+              }
+            }
+          } // stone never moves
         }
       }
 
@@ -100,17 +129,24 @@ export default function FallingSand() {
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#f0e68c";
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
-          if (grid[y][x] === 1) {
-            ctx.fillRect(
-              x * cellWidth,
-              y * cellHeight,
-              cellWidth,
-              cellHeight
-            );
+          const cell = grid[y][x];
+          if (cell === 1) {
+            ctx.fillStyle = "#ffae00";
+          } else if (cell === 2) {
+            ctx.fillStyle = "#00ffff";
+          } else if (cell === 3) {
+            ctx.fillStyle = "#8a2be2";
+          } else {
+            continue;
           }
+          ctx.fillRect(
+            x * cellWidth,
+            y * cellHeight,
+            cellWidth,
+            cellHeight
+          );
         }
       }
 
