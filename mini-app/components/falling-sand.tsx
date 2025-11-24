@@ -6,6 +6,8 @@ export default function FallingSand() {
   const canvasRef = useRef<HTMLCanvasElement>(null); const [selectedMaterial, setSelectedMaterial] = useState<number>(1);
   const gridRef = useRef<number[][]>([]);
   const setCellRef = useRef<(x: number, y: number, val: number) => void | null>(null);
+  const rowsRef = useRef<number>(0);
+  const colsRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -19,6 +21,8 @@ export default function FallingSand() {
     const grid: number[][] = Array.from({ length: rows }, () =>
       Array.from({ length: cols }, () => 0)
     );
+    rowsRef.current = rows;
+    colsRef.current = cols;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -203,8 +207,8 @@ export default function FallingSand() {
         className="btn"
         onClick={() => {
           if (gridRef.current && setCellRef.current) {
-            for (let y = 0; y < rows; y++) {
-              for (let x = 0; x < cols; x++) {
+            for (let y = 0; y < rowsRef.current; y++) {
+              for (let x = 0; x < colsRef.current; x++) {
                 setCellRef.current(x, y, 0);
               }
             }
