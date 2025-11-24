@@ -114,3 +114,65 @@
 +This is happening because the getCell function returns 0 (Empty) when checking coordinates outside the grid.
 +
 +Please update the getCell function immediately: Change the logic so that if x or y are out of bounds (less than 0 or greater than rows/cols), it returns 1 (Solid). This will treat the floor and walls as solid boundaries and stop the sand from falling into the void.
+
+# 2025-11-24 14:36:59.696998
++Great, the physics are stable. Now, please upgrade the app to V2 with these specific features:
++
++1. Add New Materials (IDs):
++
++0: Empty (Black)
++
++1: Sand (Neon Orange #ffae00) - already done.
++
++2: Water (Neon Cyan #00ffff)
++
++3: Stone (Neon Purple #8a2be2)
++
++2. Update Physics Logic:
++
++Keep the Sand logic exactly as is.
++
++Add Water Logic: If Water (2) cannot move down, it should check left and right. If a side is empty, move there (this allows it to flow flat).
++
++Add Stone Logic: Stone (3) never moves.
++
++3. Update the UI:
++
++Add a toolbar at the top with buttons: 'Sand', 'Water', 'Stone', and 'Eraser'.
++
++Highlight the selected button.
++
++Update the mouseDown logic to paint with the selected material ID.
++
++Crucial: Maintain the getCell boundary fix (returning 1 for out-of-bounds) so nothing leaks.
+
+# 2025-11-24 14:36:59.697310
++Great, the physics are stable. Now, please upgrade the app to V2 with these specific features:
++
++1. Add New Materials (IDs):
++
++0: Empty (Black)
++
++1: Sand (Neon Orange #ffae00) - already done.
++
++2: Water (Neon Cyan #00ffff)
++
++3: Stone (Neon Purple #8a2be2)
++
++2. Update Physics Logic:
++
++Keep the Sand logic exactly as is.
++
++Add Water Logic: If Water (2) cannot move down, it should check left and right. If a side is empty, move there (this allows it to flow flat).
++
++Add Stone Logic: Stone (3) never moves.
++
++3. Update the UI:
++
++Add a toolbar at the top with buttons: 'Sand', 'Water', 'Stone', and 'Eraser'.
++
++Highlight the selected button.
++
++Update the mouseDown logic to paint with the selected material ID.
++
++Crucial: Maintain the getCell boundary fix (returning 1 for out-of-bounds) so nothing leaks.
