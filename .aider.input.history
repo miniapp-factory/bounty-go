@@ -182,3 +182,29 @@
 
 # 2025-11-24 15:33:30.071202
 +The toolbar is currently broken: it is not visible and it is not functional (I cannot click anything). Please fix the CSS/Layout so it sits on top and is interactive. Give it a background color to make it visible. When I select an element, ensure it still uses the 'sand' color. Finally, add a 'Clear' button to the toolbar
+
+# 2025-11-24 16:03:47.028934
++he water logic is buggy (it spasms and moves left) because the simulation updates the grid array in-place while iterating through it. This causes particles moving right to be processed multiple times in a single frame.
++
++Please refactor the animate function to use a Double Buffering approach:
++
++Create a nextGrid (a copy of the current grid) at the start of the frame.
++
++Read the state from the current grid but write the changes to nextGrid.
++
++Ensure water flows naturally (check down, then check down-left/down-right, then left/right).
++
++At the end of the loop, update the ref and state to use nextGrid.
+
+# 2025-11-24 16:03:47.029283
++he water logic is buggy (it spasms and moves left) because the simulation updates the grid array in-place while iterating through it. This causes particles moving right to be processed multiple times in a single frame.
++
++Please refactor the animate function to use a Double Buffering approach:
++
++Create a nextGrid (a copy of the current grid) at the start of the frame.
++
++Read the state from the current grid but write the changes to nextGrid.
++
++Ensure water flows naturally (check down, then check down-left/down-right, then left/right).
++
++At the end of the loop, update the ref and state to use nextGrid.
