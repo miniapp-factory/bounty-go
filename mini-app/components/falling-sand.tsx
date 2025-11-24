@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function FallingSand() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null); const [selectedMaterial, setSelectedMaterial] = useState<number>(1);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -44,7 +44,7 @@ export default function FallingSand() {
       const y = Math.floor(((e.clientY - rect.top) / canvas.height) * rows);
       for (let dy = -1; dy <= 1; dy++) {
         for (let dx = -1; dx <= 1; dx++) {
-          setCell(x + dx, y + dy, 1);
+          setCell(x + dx, y + dy, selectedMaterial);
         }
       }
     };
@@ -127,5 +127,35 @@ export default function FallingSand() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed inset-0" />;
+  return (
+    <>
+      <div className="toolbar fixed top-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <button
+          className={`btn ${selectedMaterial === 1 ? 'selected' : ''}`}
+          onClick={() => setSelectedMaterial(1)}
+        >
+          Sand
+        </button>
+        <button
+          className={`btn ${selectedMaterial === 2 ? 'selected' : ''}`}
+          onClick={() => setSelectedMaterial(2)}
+        >
+          Water
+        </button>
+        <button
+          className={`btn ${selectedMaterial === 3 ? 'selected' : ''}`}
+          onClick={() => setSelectedMaterial(3)}
+        >
+          Stone
+        </button>
+        <button
+          className={`btn ${selectedMaterial === 0 ? 'selected' : ''}`}
+          onClick={() => setSelectedMaterial(0)}
+        >
+          Eraser
+        </button>
+      </div>
+      <canvas ref={canvasRef} className="fixed inset-0" />
+    </>
+  );
 }
