@@ -78,3 +78,25 @@
 +```
 +
 +Generate an app logo and update the app metadata title and description.
+
+# 2025-11-24 12:36:40.818786
++There is a bug: the sand is disappearing at the bottom or overlapping. Fix the physics loop with these specific changes:
++
++Switch to In-Place Updates: Remove the nextGrid logic. Modify the grid directly inside the loop.
++
++Strict Boundary Check: Before moving a particle down, explicitly check if (row + 1 < rows). If row + 1 is outside the grid, the sand MUST stay put.
++
++Randomness: When checking diagonally (down-left or down-right), use Math.random() to pick which side to try first, so the pile doesn't just fall to the left.
++
++Keep the Bottom-Up Loop: Ensure you are still iterating for (let r = rows - 1; r >= 0; r--)."
+
+# 2025-11-24 12:36:40.819432
++There is a bug: the sand is disappearing at the bottom or overlapping. Fix the physics loop with these specific changes:
++
++Switch to In-Place Updates: Remove the nextGrid logic. Modify the grid directly inside the loop.
++
++Strict Boundary Check: Before moving a particle down, explicitly check if (row + 1 < rows). If row + 1 is outside the grid, the sand MUST stay put.
++
++Randomness: When checking diagonally (down-left or down-right), use Math.random() to pick which side to try first, so the pile doesn't just fall to the left.
++
++Keep the Bottom-Up Loop: Ensure you are still iterating for (let r = rows - 1; r >= 0; r--)."
