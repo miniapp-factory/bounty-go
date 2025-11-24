@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 
 export default function FallingSand() {
   const canvasRef = useRef<HTMLCanvasElement>(null); const [selectedMaterial, setSelectedMaterial] = useState<number>(1);
+  const gridRef = useRef<number[][]>([]);
+  const setCellRef = useRef<(x: number, y: number, val: number) => void>();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -36,6 +38,8 @@ export default function FallingSand() {
       if (x < 0 || x >= cols || y < 0 || y >= rows) return;
       grid[y][x] = val;
     };
+    setCellRef.current = setCell;
+    gridRef.current = grid;
 
     const mouseMove = (e: MouseEvent) => {
       if (!dragging) return;
@@ -165,32 +169,50 @@ export default function FallingSand() {
 
   return (
     <>
-      <div className="toolbar fixed top-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="toolbar fixed top-4 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-white/20 backdrop-blur-md z-50 p-2 rounded-md">
         <button
           className={`btn ${selectedMaterial === 1 ? 'selected' : ''}`}
           onClick={() => setSelectedMaterial(1)}
+          style={{ backgroundColor: selectedMaterial === 1 ? '#ffae00' : '' }}
         >
           Sand
         </button>
         <button
           className={`btn ${selectedMaterial === 2 ? 'selected' : ''}`}
           onClick={() => setSelectedMaterial(2)}
+          style={{ backgroundColor: selectedMaterial === 2 ? '#ffae00' : '' }}
         >
           Water
         </button>
         <button
           className={`btn ${selectedMaterial === 3 ? 'selected' : ''}`}
           onClick={() => setSelectedMaterial(3)}
+          style={{ backgroundColor: selectedMaterial === 3 ? '#ffae00' : '' }}
         >
           Stone
         </button>
         <button
           className={`btn ${selectedMaterial === 0 ? 'selected' : ''}`}
           onClick={() => setSelectedMaterial(0)}
+          style={{ backgroundColor: selectedMaterial === 0 ? '#ffae00' : '' }}
         >
           Eraser
         </button>
       </div>
+      <button
+        className="btn"
+        onClick={() => {
+          if (gridRef.current && setCellRef.current) {
+            for (let y = 0; y < rows; y++) {
+              for (let x = 0; x < cols; x++) {
+                setCellRef.current(x, y, 0);
+              }
+            }
+          }
+        }}
+      >
+        Clear
+      </button>
       <canvas ref={canvasRef} className="fixed inset-0" />
     </>
   );
