@@ -1,0 +1,80 @@
+
+# 2025-11-24 12:23:51.296990
++Code the following app
++```
++Goal: Create the canvas grid and get sand particles to fall and stack correctly.
++
++Build a raw Vanilla JavaScript "Falling Sand" simulation on an HTML5 Canvas, with no external dependencies.
++
++1. The Setup:
++
++Create a full-screen black canvas.
++
++Define a grid resolution of cols = 120 and rows = 80. Create a 2D array called grid to store the state of each cell.
++
++Initialize the grid filled with zeros (0 = empty sky).
++
++2. The Physics Loop (The crucial part):
++
++In the requestAnimationFrame loop, create a nextGrid (a copy of the current grid) to calculate the next frame.
++
++Iterate through the grid from the bottom row up to the top row.
++
++If a cell is 1 (Sand):
++
++Rule A (Gravity): If the cell directly below is 0, move the sand down to that cell in nextGrid.
++
++Rule B (Piling): If the cell below is occupied, check the cell below-left AND the cell below-right. If either is 0, move the sand there randomly.
++
++3. Interaction:
++
++Add a mouse drag event. When dragging, set a 3x3 square of cells around the mouse cursor to 1 (Sand).
++
++4. Rendering:
++
++Draw the grid to the canvas. Scale the 120x80 grid to fit the window size.
++
++If a cell is 1, draw a yellowish pixel. If 0, draw black.
++```
++
++Generate an app logo and update the app metadata title and description.
+
+# 2025-11-24 12:23:51.297506
++Code the following app
++```
++Goal: Create the canvas grid and get sand particles to fall and stack correctly.
++
++Build a raw Vanilla JavaScript "Falling Sand" simulation on an HTML5 Canvas, with no external dependencies.
++
++1. The Setup:
++
++Create a full-screen black canvas.
++
++Define a grid resolution of cols = 120 and rows = 80. Create a 2D array called grid to store the state of each cell.
++
++Initialize the grid filled with zeros (0 = empty sky).
++
++2. The Physics Loop (The crucial part):
++
++In the requestAnimationFrame loop, create a nextGrid (a copy of the current grid) to calculate the next frame.
++
++Iterate through the grid from the bottom row up to the top row.
++
++If a cell is 1 (Sand):
++
++Rule A (Gravity): If the cell directly below is 0, move the sand down to that cell in nextGrid.
++
++Rule B (Piling): If the cell below is occupied, check the cell below-left AND the cell below-right. If either is 0, move the sand there randomly.
++
++3. Interaction:
++
++Add a mouse drag event. When dragging, set a 3x3 square of cells around the mouse cursor to 1 (Sand).
++
++4. Rendering:
++
++Draw the grid to the canvas. Scale the 120x80 grid to fit the window size.
++
++If a cell is 1, draw a yellowish pixel. If 0, draw black.
++```
++
++Generate an app logo and update the app metadata title and description.
