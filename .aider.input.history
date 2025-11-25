@@ -318,3 +318,29 @@
 +CRITICAL: Set hasMoved[newY][newX] = true. This prevents the loop from picking up the particle again in this frame.
 +
 +Apply this logic to both Sand and Water.
+
+# 2025-11-25 02:33:19.071921
++I have two critical bugs that need fixing:
++
++The Crash: I am getting Cannot read properties of undefined when sand hits the bottom. This is because inside the else block of the sand logic, you are checking diagonals (grid[y+1][x-1]) without verifying that y + 1 is within bounds. You must wrap the entire movement logic (vertical AND diagonal) inside a check that ensures y is not the last row.
++
++The Zombie Loops: The useEffect depends on selectedMaterial. Every time I change tools, a new animate loop starts, but the old one is never cancelled, causing them to run in parallel and glitch the grid.
++
++Fix: Use a useRef to track selectedMaterial so we can remove it from the useEffect dependency array. This way, the loop never needs to restart just because I changed tools.
++
++Safety: Also add cancelAnimationFrame in the cleanup function just to be safe.
++
++Please refactor the code to fix these issues. Keep the 'Moved' matrix logic as it is correct.
+
+# 2025-11-25 02:33:19.072924
++I have two critical bugs that need fixing:
++
++The Crash: I am getting Cannot read properties of undefined when sand hits the bottom. This is because inside the else block of the sand logic, you are checking diagonals (grid[y+1][x-1]) without verifying that y + 1 is within bounds. You must wrap the entire movement logic (vertical AND diagonal) inside a check that ensures y is not the last row.
++
++The Zombie Loops: The useEffect depends on selectedMaterial. Every time I change tools, a new animate loop starts, but the old one is never cancelled, causing them to run in parallel and glitch the grid.
++
++Fix: Use a useRef to track selectedMaterial so we can remove it from the useEffect dependency array. This way, the loop never needs to restart just because I changed tools.
++
++Safety: Also add cancelAnimationFrame in the cleanup function just to be safe.
++
++Please refactor the code to fix these issues. Keep the 'Moved' matrix logic as it is correct.
