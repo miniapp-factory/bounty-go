@@ -391,6 +391,34 @@ export default function FallingSand() {
         >
           Eraser
         </button>
+        <button
+          className={`btn ${selectedMaterial === 4 ? 'selected' : ''}`}
+          onClick={() => setSelectedMaterial(4)}
+          style={{ backgroundColor: selectedMaterial === 4 ? '#8B4513' : '' }}
+        >
+          Wood
+        </button>
+        <button
+          className={`btn ${selectedMaterial === 5 ? 'selected' : ''}`}
+          onClick={() => setSelectedMaterial(5)}
+          style={{ backgroundColor: selectedMaterial === 5 ? '#FF4500' : '' }}
+        >
+          Fire
+        </button>
+        <button
+          className={`btn ${selectedMaterial === 6 ? 'selected' : ''}`}
+          onClick={() => setSelectedMaterial(6)}
+          style={{ backgroundColor: selectedMaterial === 6 ? '#696969' : '' }}
+        >
+          Smoke
+        </button>
+        <button
+          className={`btn ${selectedMaterial === 7 ? 'selected' : ''}`}
+          onClick={() => setSelectedMaterial(7)}
+          style={{ backgroundColor: selectedMaterial === 7 ? '#00FF00' : '' }}
+        >
+          Acid
+        </button>
       </div>
       <button
         className="btn"
