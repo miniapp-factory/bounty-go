@@ -452,3 +452,33 @@
 +Continue using the hasMoved matrix to prevent 'teleporting' or infinite loops during reactions.
 +
 +Ensure the loop checks strictly so a particle doesn't react twice in one frame.
+
+# 2025-11-25 04:01:08.677511
++The physics logic for the new materials is present, but you forgot to update the User Interface. I cannot select the new materials because the buttons are missing from the toolbar.
++
++Please update the return statement (JSX) to include new buttons for the added materials. Add these buttons to the toolbar div:
++
++Wood: onClick sets material to 4. Color: #8B4513 (SaddleBrown).
++
++Fire: onClick sets material to 5. Color: #FF4500 (OrangeRed).
++
++Smoke: onClick sets material to 6. Color: #696969 (DimGray).
++
++Acid: onClick sets material to 7. Color: #00FF00 (Lime).
++
++Keep the existing Sand, Water, Stone, and Eraser buttons exactly as they are.
+
+# 2025-11-25 04:01:08.677805
++The physics logic for the new materials is present, but you forgot to update the User Interface. I cannot select the new materials because the buttons are missing from the toolbar.
++
++Please update the return statement (JSX) to include new buttons for the added materials. Add these buttons to the toolbar div:
++
++Wood: onClick sets material to 4. Color: #8B4513 (SaddleBrown).
++
++Fire: onClick sets material to 5. Color: #FF4500 (OrangeRed).
++
++Smoke: onClick sets material to 6. Color: #696969 (DimGray).
++
++Acid: onClick sets material to 7. Color: #00FF00 (Lime).
++
++Keep the existing Sand, Water, Stone, and Eraser buttons exactly as they are.
