@@ -53,7 +53,7 @@ export default function FallingSand() {
       const y = Math.floor(((e.clientY - rect.top) / canvas.height) * rows);
       for (let dy = -1; dy <= 1; dy++) {
         for (let dx = -1; dx <= 1; dx++) {
-          setCell(x + dx, y + dy, selectedMaterial);
+          setCell(x + dx, y + dy, selectedMaterialRef.current);
         }
       }
     };
@@ -76,6 +76,7 @@ export default function FallingSand() {
           const cell = grid[y][x];
           if (cell === 1) {
             // Sand logic
+            if (y + 1 >= rows) continue;  // prevent out‑of‑bounds access
             if (y + 1 < rows && grid[y + 1][x] === 0) {
               grid[y + 1][x] = 1;
               grid[y][x] = 0;
@@ -179,8 +180,13 @@ export default function FallingSand() {
       canvas.removeEventListener("mousedown", mouseDown);
       canvas.removeEventListener("mouseup", mouseUp);
       canvas.removeEventListener("mousemove", mouseMove);
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [selectedMaterial]);
+  }, []);  // removed dependency on selectedMaterial
+
+  useEffect(() => {
+    selectedMaterialRef.current = selectedMaterial;
+  }, [selectedMaterial]);  // keep ref in sync with selectedMaterial
 
   return (
     <>
