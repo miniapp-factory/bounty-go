@@ -582,3 +582,69 @@
 +Ensure the animate loop strictly uses the hasMoved matrix to prevent double-processing.
 +
 +Initialize the grid with a 'Stone Floor' at the bottom 5 rows so the simulation isn't empty on load.
+
+# 2025-11-25 05:15:34.574612
++The simulation has three specific errors that need fixing in the next iteration:
++
++1. Fix Acid Physics (The 'Bleeding' Bug) The Acid logic is currently: Check Down -> Check Sides. This causes it to float sideways instead of sliding down slopes.
++
++Refactor Acid Logic: It must strictly follow this order of priority:
++
++Down: (y+1).
++
++Diagonals (Gravity): Check y+1, x-1 AND y+1, x+1. (Randomize which side is checked first).
++
++Sideways (Spreading): Only check x-1 / x+1 if Down and Diagonals are blocked.
++
++Note: Ensure Acid creates a swap effect if it hits Smoke (6) or Water (2) (Acid should sink through Water, or kill it).
++
++2. Implement Missing Plant Logic (ID: 8) The 'Plant' code is missing from the loop.
++
++Add Logic: Inside animate, add else if (cell === 8).
++
++Behavior: Plants do not move. However, loop through neighbors (radius 1 or 2). If a neighbor is Water (2):
++
++Remove the Water (turn it to 0).
++
++Grow: With a small probability (e.g., 10%), turn a random adjacent Empty (0) cell into a new Plant (8).
++
++3. Fix UI/Layout
++
++Plant Button: The JSX is missing the button for Plants. Add a button setting material to 8 (Color: #228B22).
++
++Slider Visibility: The <input type='range'> is currently outside the toolbar and invisible. Move it INSIDE the <div className="toolbar ..."> so it appears next to the buttons.
++
++Please generate the full, corrected code.
+
+# 2025-11-25 05:15:34.681737
++The simulation has three specific errors that need fixing in the next iteration:
++
++1. Fix Acid Physics (The 'Bleeding' Bug) The Acid logic is currently: Check Down -> Check Sides. This causes it to float sideways instead of sliding down slopes.
++
++Refactor Acid Logic: It must strictly follow this order of priority:
++
++Down: (y+1).
++
++Diagonals (Gravity): Check y+1, x-1 AND y+1, x+1. (Randomize which side is checked first).
++
++Sideways (Spreading): Only check x-1 / x+1 if Down and Diagonals are blocked.
++
++Note: Ensure Acid creates a swap effect if it hits Smoke (6) or Water (2) (Acid should sink through Water, or kill it).
++
++2. Implement Missing Plant Logic (ID: 8) The 'Plant' code is missing from the loop.
++
++Add Logic: Inside animate, add else if (cell === 8).
++
++Behavior: Plants do not move. However, loop through neighbors (radius 1 or 2). If a neighbor is Water (2):
++
++Remove the Water (turn it to 0).
++
++Grow: With a small probability (e.g., 10%), turn a random adjacent Empty (0) cell into a new Plant (8).
++
++3. Fix UI/Layout
++
++Plant Button: The JSX is missing the button for Plants. Add a button setting material to 8 (Color: #228B22).
++
++Slider Visibility: The <input type='range'> is currently outside the toolbar and invisible. Move it INSIDE the <div className="toolbar ..."> so it appears next to the buttons.
++
++Please generate the full, corrected code.
