@@ -44,6 +44,7 @@ export default function FallingSand() {
     };
     setCellRef.current = setCell;
     gridRef.current = grid;
+    let frameCount = 0;
 
     const mouseMove = (e: MouseEvent) => {
       if (!dragging) return;
