@@ -77,34 +77,60 @@ export default function FallingSand() {
           if (cell === 1) {
             // Sand logic
             if (y + 1 >= rows) continue;  // prevent out‑of‑bounds access
-            if (y + 1 < rows && grid[y + 1][x] === 0) {
+            const below = grid[y + 1][x];
+            if (below === 0) {
               grid[y + 1][x] = 1;
               grid[y][x] = 0;
               hasMoved[y + 1][x] = true;
+            } else if (below === 2) {
+              grid[y + 1][x] = 1;
+              grid[y][x] = 2;
+              hasMoved[y + 1][x] = true;
+              hasMoved[y][x] = true;
             } else {
-              const leftEmpty = x > 0 && grid[y + 1][x - 1] === 0;
-              const rightEmpty = x < cols - 1 && grid[y + 1][x + 1] === 0;
-              if (leftEmpty || rightEmpty) {
+              const leftBelow = x > 0 ? grid[y + 1][x - 1] : 1;
+              const rightBelow = x < cols - 1 ? grid[y + 1][x + 1] : 1;
+              if (leftBelow === 0 || leftBelow === 2 || rightBelow === 0 || rightBelow === 2) {
                 const tryLeftFirst = Math.random() < 0.5;
                 if (tryLeftFirst) {
-                  if (leftEmpty) {
+                  if (leftBelow === 0) {
                     grid[y + 1][x - 1] = 1;
                     grid[y][x] = 0;
                     hasMoved[y + 1][x - 1] = true;
-                  } else if (rightEmpty) {
+                  } else if (leftBelow === 2) {
+                    grid[y + 1][x - 1] = 1;
+                    grid[y][x] = 2;
+                    hasMoved[y + 1][x - 1] = true;
+                    hasMoved[y][x] = true;
+                  } else if (rightBelow === 0) {
                     grid[y + 1][x + 1] = 1;
                     grid[y][x] = 0;
                     hasMoved[y + 1][x + 1] = true;
+                  } else if (rightBelow === 2) {
+                    grid[y + 1][x + 1] = 1;
+                    grid[y][x] = 2;
+                    hasMoved[y + 1][x + 1] = true;
+                    hasMoved[y][x] = true;
                   }
                 } else {
-                  if (rightEmpty) {
+                  if (rightBelow === 0) {
                     grid[y + 1][x + 1] = 1;
                     grid[y][x] = 0;
                     hasMoved[y + 1][x + 1] = true;
-                  } else if (leftEmpty) {
+                  } else if (rightBelow === 2) {
+                    grid[y + 1][x + 1] = 1;
+                    grid[y][x] = 2;
+                    hasMoved[y + 1][x + 1] = true;
+                    hasMoved[y][x] = true;
+                  } else if (leftBelow === 0) {
                     grid[y + 1][x - 1] = 1;
                     grid[y][x] = 0;
                     hasMoved[y + 1][x - 1] = true;
+                  } else if (leftBelow === 2) {
+                    grid[y + 1][x - 1] = 1;
+                    grid[y][x] = 2;
+                    hasMoved[y + 1][x - 1] = true;
+                    hasMoved[y][x] = true;
                   }
                 }
               }
