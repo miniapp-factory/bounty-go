@@ -280,3 +280,41 @@
 +CRITICAL: Set hasMoved[newY][newX] = true. This prevents the loop from picking up the particle again in this frame.
 +
 +Apply this logic to both Sand and Water.
+
+# 2025-11-25 02:19:04.041253
++The water simulation is broken because of 'Cascading Updates.' When water moves to the right (x+1), the loop encounters it again in the same frame and moves it again, causing it to shoot across the screen.
++
++Please completely rewrite the animate function to use a 'Moved' Matrix and Alternating Scan Directions. Follow these exact rules:
++
++Reset State: At the very start of animate, create a 2D boolean array called hasMoved filled with false.
++
++Alternating Loop: Create a frameCount variable outside the loop. Inside animate, if frameCount is even, loop x from 0 to cols. If odd, loop x from cols - 1 down to 0. This eliminates the 'Left Bias'.
++
++The Check: Inside the loop, strictly check: if (grid[y][x] > 0 && !hasMoved[y][x]). Do not process a cell if it is marked as moved.
++
++The Lock: When you successfully move a particle from (x, y) to (newX, newY):
++
++Update the grid values.
++
++CRITICAL: Set hasMoved[newY][newX] = true. This prevents the loop from picking up the particle again in this frame.
++
++Apply this logic to both Sand and Water.
+
+# 2025-11-25 02:19:04.043222
++The water simulation is broken because of 'Cascading Updates.' When water moves to the right (x+1), the loop encounters it again in the same frame and moves it again, causing it to shoot across the screen.
++
++Please completely rewrite the animate function to use a 'Moved' Matrix and Alternating Scan Directions. Follow these exact rules:
++
++Reset State: At the very start of animate, create a 2D boolean array called hasMoved filled with false.
++
++Alternating Loop: Create a frameCount variable outside the loop. Inside animate, if frameCount is even, loop x from 0 to cols. If odd, loop x from cols - 1 down to 0. This eliminates the 'Left Bias'.
++
++The Check: Inside the loop, strictly check: if (grid[y][x] > 0 && !hasMoved[y][x]). Do not process a cell if it is marked as moved.
++
++The Lock: When you successfully move a particle from (x, y) to (newX, newY):
++
++Update the grid values.
++
++CRITICAL: Set hasMoved[newY][newX] = true. This prevents the loop from picking up the particle again in this frame.
++
++Apply this logic to both Sand and Water.
