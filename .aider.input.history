@@ -382,3 +382,73 @@
 +Diagonals: Apply this same logic to the diagonal checks (down-left and down-right). If Sand sees Water diagonally below, it should swap with it.
 +
 +Keep the rest of the code exactly the same.
+
+# 2025-11-25 03:40:35.993417
++Please upgrade the animate function to include a Chemical Reaction System and new materials.
++
++1. Add New Materials:
++
++Wood (4): Static solid (like Stone), but flammable. Color: Brown.
++
++Fire (5): Moves erratically (like gas). Burns Wood. Color: Orange/Red flickering.
++
++Smoke (6): Rises up. Created by Fire. Disappears at the top. Color: Dark Grey.
++
++Acid (7): Liquid (moves like Water). Corrodes Stone and Wood. Color: Bright Green.
++
++2. Implement Interaction Logic (The 'Chemistry Engine'):
++
++Combustion: If Fire touches Wood, the Wood turns into Fire.
++
++Extinguish: If Fire touches Water, the Fire turns into Smoke and the Water disappears (evaporates).
++
++Decay: Fire has a random chance (e.g., 5%) to turn into Smoke every frame (so it burns out).
++
++Corrosion: If Acid touches Stone, Wood, or Sand, BOTH the Acid and the target block disappear (neutralize).
++
++Gravity/Buoyancy:
++
++Smoke should rise (swap with Empty/Sand/Water above it).
++
++Acid behaves exactly like Water (falls and flows).
++
++3. Safety:
++
++Continue using the hasMoved matrix to prevent 'teleporting' or infinite loops during reactions.
++
++Ensure the loop checks strictly so a particle doesn't react twice in one frame.
+
+# 2025-11-25 03:40:35.993955
++Please upgrade the animate function to include a Chemical Reaction System and new materials.
++
++1. Add New Materials:
++
++Wood (4): Static solid (like Stone), but flammable. Color: Brown.
++
++Fire (5): Moves erratically (like gas). Burns Wood. Color: Orange/Red flickering.
++
++Smoke (6): Rises up. Created by Fire. Disappears at the top. Color: Dark Grey.
++
++Acid (7): Liquid (moves like Water). Corrodes Stone and Wood. Color: Bright Green.
++
++2. Implement Interaction Logic (The 'Chemistry Engine'):
++
++Combustion: If Fire touches Wood, the Wood turns into Fire.
++
++Extinguish: If Fire touches Water, the Fire turns into Smoke and the Water disappears (evaporates).
++
++Decay: Fire has a random chance (e.g., 5%) to turn into Smoke every frame (so it burns out).
++
++Corrosion: If Acid touches Stone, Wood, or Sand, BOTH the Acid and the target block disappear (neutralize).
++
++Gravity/Buoyancy:
++
++Smoke should rise (swap with Empty/Sand/Water above it).
++
++Acid behaves exactly like Water (falls and flows).
++
++3. Safety:
++
++Continue using the hasMoved matrix to prevent 'teleporting' or infinite loops during reactions.
++
++Ensure the loop checks strictly so a particle doesn't react twice in one frame.
