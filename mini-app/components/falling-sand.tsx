@@ -169,6 +169,148 @@ export default function FallingSand() {
                 }
               }
             }
+          } else if (cell === 3) {
+            // Stone: static, nothing to do
+            continue;
+          } else if (cell === 4) {
+            // Wood: static, can be burned by fire
+            for (let dy = -1; dy <= 1; dy++) {
+              for (let dx = -1; dx <= 1; dx++) {
+                if (dx === 0 && dy === 0) continue;
+                const nx = x + dx, ny = y + dy;
+                if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+                if (grid[ny][nx] === 5 && !hasMoved[ny][nx]) {
+                  grid[y][x] = 5;
+                  hasMoved[y][x] = true;
+                  hasMoved[ny][nx] = true;
+                  break;
+                }
+              }
+              if (grid[y][x] === 5) break;
+            }
+          } else if (cell === 5) {
+            // Fire logic
+            let extinguished = false;
+            for (let dy = -1; dy <= 1; dy++) {
+              for (let dx = -1; dx <= 1; dx++) {
+                if (dx === 0 && dy === 0) continue;
+                const nx = x + dx, ny = y + dy;
+                if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+                if (grid[ny][nx] === 2 && !hasMoved[ny][nx]) {
+                  grid[y][x] = 6;
+                  grid[ny][nx] = 0;
+                  hasMoved[y][x] = true;
+                  hasMoved[ny][nx] = true;
+                  extinguished = true;
+                  break;
+                }
+              }
+              if (extinguished) break;
+            }
+            if (extinguished) continue;
+            let combusted = false;
+            for (let dy = -1; dy <= 1; dy++) {
+              for (let dx = -1; dx <= 1; dx++) {
+                if (dx === 0 && dy === 0) continue;
+                const nx = x + dx, ny = y + dy;
+                if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+                if (grid[ny][nx] === 4 && !hasMoved[ny][nx]) {
+                  grid[ny][nx] = 5;
+                  hasMoved[ny][nx] = true;
+                  combusted = true;
+                  break;
+                }
+              }
+              if (combusted) break;
+            }
+            if (combusted) continue;
+            const dirs = [
+              [-1, -1], [0, -1], [1, -1],
+              [-1, 0],          [1, 0],
+              [-1, 1], [0, 1], [1, 1]
+            ];
+            const shuffled = dirs.sort(() => Math.random() - 0.5);
+            for (const [dx, dy] of shuffled) {
+              const nx = x + dx, ny = y + dy;
+              if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+              if (grid[ny][nx] === 0 && !hasMoved[ny][nx]) {
+                grid[ny][nx] = 5;
+                grid[y][x] = 0;
+                hasMoved[ny][nx] = true;
+                hasMoved[y][x] = true;
+                break;
+              }
+            }
+            if (Math.random() < 0.05) {
+              grid[y][x] = 6;
+              hasMoved[y][x] = true;
+            }
+          } else if (cell === 6) {
+            // Smoke logic: rise
+            if (y > 0 && !hasMoved[y-1][x]) {
+              const above = grid[y-1][x];
+              if (above === 0 || above === 1 || above === 2) {
+                grid[y-1][x] = 6;
+                grid[y][x] = above;
+                hasMoved[y-1][x] = true;
+                hasMoved[y][x] = true;
+              }
+            }
+          } else if (cell === 7) {
+            // Acid logic: same as water movement
+            if (y + 1 < rows && grid[y+1][x] === 0 && !hasMoved[y+1][x]) {
+              grid[y+1][x] = 7;
+              grid[y][x] = 0;
+              hasMoved[y+1][x] = true;
+              hasMoved[y][x] = true;
+            } else {
+              const leftEmpty = x > 0 && grid[y][x-1] === 0 && !hasMoved[y][x-1];
+              const rightEmpty = x < cols-1 && grid[y][x+1] === 0 && !hasMoved[y][x+1];
+              if (leftEmpty || rightEmpty) {
+                const tryLeftFirst = Math.random() < 0.5;
+                if (tryLeftFirst) {
+                  if (leftEmpty) {
+                    grid[y][x-1] = 7;
+                    grid[y][x] = 0;
+                    hasMoved[y][x-1] = true;
+                    hasMoved[y][x] = true;
+                  } else if (rightEmpty) {
+                    grid[y][x+1] = 7;
+                    grid[y][x] = 0;
+                    hasMoved[y][x+1] = true;
+                    hasMoved[y][x] = true;
+                  }
+                } else {
+                  if (rightEmpty) {
+                    grid[y][x+1] = 7;
+                    grid[y][x] = 0;
+                    hasMoved[y][x+1] = true;
+                    hasMoved[y][x] = true;
+                  } else if (leftEmpty) {
+                    grid[y][x-1] = 7;
+                    grid[y][x] = 0;
+                    hasMoved[y][x-1] = true;
+                    hasMoved[y][x] = true;
+                  }
+                }
+              }
+            }
+            for (let dy = -1; dy <= 1; dy++) {
+              for (let dx = -1; dx <= 1; dx++) {
+                if (dx === 0 && dy === 0) continue;
+                const nx = x + dx, ny = y + dy;
+                if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+                const target = grid[ny][nx];
+                if ((target === 3 || target === 4 || target === 1) && !hasMoved[ny][nx]) {
+                  grid[y][x] = 0;
+                  grid[ny][nx] = 0;
+                  hasMoved[y][x] = true;
+                  hasMoved[ny][nx] = true;
+                  break;
+                }
+              }
+              if (grid[y][x] === 0) break;
+            }
           }
         }
       }
@@ -185,6 +327,10 @@ export default function FallingSand() {
           if (cell === 1) ctx.fillStyle = "#ffae00";
           else if (cell === 2) ctx.fillStyle = "#00ffff";
           else if (cell === 3) ctx.fillStyle = "#8a2be2";
+          else if (cell === 4) ctx.fillStyle = "#8b4513";
+          else if (cell === 5) ctx.fillStyle = Math.random() < 0.5 ? "#ff4500" : "#ff8c00";
+          else if (cell === 6) ctx.fillStyle = "#555555";
+          else if (cell === 7) ctx.fillStyle = "#00ff00";
           else continue;
           ctx.fillRect(
             x * cellWidth,
