@@ -482,3 +482,37 @@
 +Acid: onClick sets material to 7. Color: #00FF00 (Lime).
 +
 +Keep the existing Sand, Water, Stone, and Eraser buttons exactly as they are.
+
+# 2025-11-25 04:38:43.863347
++have two physics issues to fix in the animate function:
++
++Acid vs. Smoke Density: Currently, Acid (7) gets blocked by Smoke (6). Acid should be heavier than Smoke.
++
++Update the Acid logic: Check if the target cell (down or diagonal) is 0 (Empty) OR 6 (Smoke).
++
++If it is Smoke, swap them: Acid goes to the new cell, Smoke moves to the old Acid cell.
++
++Remember to set hasMoved = true for both.
++
++Smoke Lifetime (Decay): Smoke should disappear after roughly 10–15 seconds. Since we only store numbers in the grid, simulate this using probability.
++
++At the very start of the Smoke logic (else if (cell === 6)), add: if (Math.random() < 0.002) { grid[y][x] = 0; continue; }
++
++This gives every smoke particle a small chance to vanish every frame, creating a natural 'fading' effect over time.
+
+# 2025-11-25 04:38:43.865363
++have two physics issues to fix in the animate function:
++
++Acid vs. Smoke Density: Currently, Acid (7) gets blocked by Smoke (6). Acid should be heavier than Smoke.
++
++Update the Acid logic: Check if the target cell (down or diagonal) is 0 (Empty) OR 6 (Smoke).
++
++If it is Smoke, swap them: Acid goes to the new cell, Smoke moves to the old Acid cell.
++
++Remember to set hasMoved = true for both.
++
++Smoke Lifetime (Decay): Smoke should disappear after roughly 10–15 seconds. Since we only store numbers in the grid, simulate this using probability.
++
++At the very start of the Smoke logic (else if (cell === 6)), add: if (Math.random() < 0.002) { grid[y][x] = 0; continue; }
++
++This gives every smoke particle a small chance to vanish every frame, creating a natural 'fading' effect over time.
