@@ -648,3 +648,77 @@
 +Slider Visibility: The <input type='range'> is currently outside the toolbar and invisible. Move it INSIDE the <div className="toolbar ..."> so it appears next to the buttons.
 +
 +Please generate the full, corrected code.
+
+# 2025-11-25 10:49:42.372956
++The previous code was incomplete. It introduced bugs and missed features. Please rewrite the entire component with these strict fixes:
++
++1. Fix Acid Physics (CRITICAL) Currently, Acid bleeds sideways. It must act like Sludge.
++
++Logic: Acid (7) can ONLY move Down (y+1) or Diagonally Down (y+1, x-1 OR y+1, x+1).
++
++Restriction: REMOVE the leftEmpty and rightEmpty sideways checks for Acid. If it cannot go down or diagonal, it stops.
++
++Interaction: Acid destroys/swaps with Water, Wood, Plants, and Smoke.
++
++2. Fix UI Layout (Slider Visibility)
++
++The <input type="range"> is currently outside the toolbar and invisible.
++
++Action: Move the <input> INSIDE the <div className="toolbar ..."> so it sits next to the buttons.
++
++Action: Add the missing Plant Button (ID 8) to the toolbar as well.
++
++3. Fix Smoke Decay
++
++Smoke currently lasts forever.
++
++Action: Inside the Smoke logic (cell === 6), add: if (Math.random() < 0.002) { grid[y][x] = 0; continue; }. (This equates to ~8 seconds at 60fps).
++
++4. Restore Plant Logic (ID: 8)
++
++You deleted the Plant logic. Re-add it.
++
++Behavior: Plants don't move. If a Plant is near Water (2) (radius 2), it turns Water to Empty and has a small chance to grow a new Plant nearby.
++
++5. Optimization
++
++Ensure the grid initialization adds the 'Stone Floor' (last 5 rows) correctly.
++
++Please output the full, corrected code.
+
+# 2025-11-25 10:49:42.373528
++The previous code was incomplete. It introduced bugs and missed features. Please rewrite the entire component with these strict fixes:
++
++1. Fix Acid Physics (CRITICAL) Currently, Acid bleeds sideways. It must act like Sludge.
++
++Logic: Acid (7) can ONLY move Down (y+1) or Diagonally Down (y+1, x-1 OR y+1, x+1).
++
++Restriction: REMOVE the leftEmpty and rightEmpty sideways checks for Acid. If it cannot go down or diagonal, it stops.
++
++Interaction: Acid destroys/swaps with Water, Wood, Plants, and Smoke.
++
++2. Fix UI Layout (Slider Visibility)
++
++The <input type="range"> is currently outside the toolbar and invisible.
++
++Action: Move the <input> INSIDE the <div className="toolbar ..."> so it sits next to the buttons.
++
++Action: Add the missing Plant Button (ID 8) to the toolbar as well.
++
++3. Fix Smoke Decay
++
++Smoke currently lasts forever.
++
++Action: Inside the Smoke logic (cell === 6), add: if (Math.random() < 0.002) { grid[y][x] = 0; continue; }. (This equates to ~8 seconds at 60fps).
++
++4. Restore Plant Logic (ID: 8)
++
++You deleted the Plant logic. Re-add it.
++
++Behavior: Plants don't move. If a Plant is near Water (2) (radius 2), it turns Water to Empty and has a small chance to grow a new Plant nearby.
++
++5. Optimization
++
++Ensure the grid initialization adds the 'Stone Floor' (last 5 rows) correctly.
++
++Please output the full, corrected code.
