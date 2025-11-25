@@ -44,6 +44,11 @@ export default function FallingSand() {
     };
     setCellRef.current = setCell;
     gridRef.current = grid;
+    for (let y = rows - 5; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        grid[y][x] = 3;
+      }
+    }
     let frameCount = 0;
 
     const mouseMove = (e: MouseEvent) => {
@@ -51,9 +56,11 @@ export default function FallingSand() {
       const rect = canvas.getBoundingClientRect();
       const x = Math.floor(((e.clientX - rect.left) / canvas.width) * cols);
       const y = Math.floor(((e.clientY - rect.top) / canvas.height) * rows);
-      for (let dy = -1; dy <= 1; dy++) {
-        for (let dx = -1; dx <= 1; dx++) {
-          setCell(x + dx, y + dy, selectedMaterialRef.current);
+      for (let dy = -brushSize; dy <= brushSize; dy++) {
+        for (let dx = -brushSize; dx <= brushSize; dx++) {
+          if (dx * dx + dy * dy <= brushSize * brushSize) {
+            setCell(x + dx, y + dy, selectedMaterialRef.current);
+          }
         }
       }
     };
@@ -90,7 +97,7 @@ export default function FallingSand() {
             } else {
               const leftBelow = x > 0 ? grid[y + 1][x - 1] : 1;
               const rightBelow = x < cols - 1 ? grid[y + 1][x + 1] : 1;
-              if (leftBelow === 0 || leftBelow === 2 || rightBelow === 0 || rightBelow === 2) {
+              if (leftBelow === 0 || leftBelow === 2 || leftBelow === 6 || rightBelow === 0 || rightBelow === 2 || rightBelow === 6) {
                 const tryLeftFirst = Math.random() < 0.5;
                 if (tryLeftFirst) {
                   if (leftBelow === 0) {
@@ -102,6 +109,11 @@ export default function FallingSand() {
                     grid[y][x] = 2;
                     hasMoved[y + 1][x - 1] = true;
                     hasMoved[y][x] = true;
+                  } else if (leftBelow === 6) {
+                    grid[y + 1][x - 1] = 1;
+                    grid[y][x] = 6;
+                    hasMoved[y + 1][x - 1] = true;
+                    hasMoved[y][x] = true;
                   } else if (rightBelow === 0) {
                     grid[y + 1][x + 1] = 1;
                     grid[y][x] = 0;
@@ -109,6 +121,11 @@ export default function FallingSand() {
                   } else if (rightBelow === 2) {
                     grid[y + 1][x + 1] = 1;
                     grid[y][x] = 2;
+                    hasMoved[y + 1][x + 1] = true;
+                    hasMoved[y][x] = true;
+                  } else if (rightBelow === 6) {
+                    grid[y + 1][x + 1] = 1;
+                    grid[y][x] = 6;
                     hasMoved[y + 1][x + 1] = true;
                     hasMoved[y][x] = true;
                   }
@@ -155,6 +172,16 @@ export default function FallingSand() {
                     grid[y][x + 1] = 2;
                     grid[y][x] = 0;
                     hasMoved[y][x + 1] = true;
+                  } else if (grid[y][x - 1] === 6) {
+                    grid[y][x - 1] = 2;
+                    grid[y][x] = 6;
+                    hasMoved[y][x - 1] = true;
+                    hasMoved[y][x] = true;
+                  } else if (grid[y][x + 1] === 6) {
+                    grid[y][x + 1] = 2;
+                    grid[y][x] = 6;
+                    hasMoved[y][x + 1] = true;
+                    hasMoved[y][x] = true;
                   }
                 } else {
                   if (rightEmpty) {
@@ -179,7 +206,7 @@ export default function FallingSand() {
                 if (dx === 0 && dy === 0) continue;
                 const nx = x + dx, ny = y + dy;
                 if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
-                if (grid[ny][nx] === 5 && !hasMoved[ny][nx]) {
+                if ((grid[ny][nx] === 5 || grid[ny][nx] === 8) && !hasMoved[ny][nx]) {
                   grid[y][x] = 5;
                   hasMoved[y][x] = true;
                   hasMoved[ny][nx] = true;
@@ -214,7 +241,7 @@ export default function FallingSand() {
                 if (dx === 0 && dy === 0) continue;
                 const nx = x + dx, ny = y + dy;
                 if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
-                if (grid[ny][nx] === 4 && !hasMoved[ny][nx]) {
+                if ((grid[ny][nx] === 4 || grid[ny][nx] === 8) && !hasMoved[ny][nx]) {
                   grid[ny][nx] = 5;
                   hasMoved[ny][nx] = true;
                   combusted = true;
@@ -294,6 +321,18 @@ export default function FallingSand() {
                   }
                 }
               }
+              // Handle smoke swap
+              if (grid[y][x-1] === 6 && !hasMoved[y][x-1]) {
+                grid[y][x-1] = 7;
+                grid[y][x] = 6;
+                hasMoved[y][x-1] = true;
+                hasMoved[y][x] = true;
+              } else if (grid[y][x+1] === 6 && !hasMoved[y][x+1]) {
+                grid[y][x+1] = 7;
+                grid[y][x] = 6;
+                hasMoved[y][x+1] = true;
+                hasMoved[y][x] = true;
+              }
             }
             for (let dy = -1; dy <= 1; dy++) {
               for (let dx = -1; dx <= 1; dx++) {
@@ -331,6 +370,7 @@ export default function FallingSand() {
           else if (cell === 5) ctx.fillStyle = Math.random() < 0.5 ? "#ff4500" : "#ff8c00";
           else if (cell === 6) ctx.fillStyle = "#555555";
           else if (cell === 7) ctx.fillStyle = "#00ff00";
+          else if (cell === 8) ctx.fillStyle = "#228B22";
           else continue;
           ctx.fillRect(
             x * cellWidth,
@@ -420,6 +460,14 @@ export default function FallingSand() {
           Acid
         </button>
       </div>
+      <input
+        type="range"
+        min="1"
+        max="5"
+        value={brushSize}
+        onChange={e => setBrushSize(Number(e.target.value))}
+        className="slider"
+      />
       <button
         className="btn"
         onClick={() => {
