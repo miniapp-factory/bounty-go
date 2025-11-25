@@ -344,3 +344,41 @@
 +Safety: Also add cancelAnimationFrame in the cleanup function just to be safe.
 +
 +Please refactor the code to fix these issues. Keep the 'Moved' matrix logic as it is correct.
+
+# 2025-11-25 03:16:04.064637
++Currently, the Sand (1) acts as if Water (2) is a solid wall and stacks on top of it.
++
++Please update the Sand Logic inside the animate function to implement Density:
++
++Check Down: In the Sand logic, check if the cell directly below (y+1) is Empty (0) OR Water (2).
++
++The Swap: If the cell below is Water:
++
++Set grid[y+1][x] = 1 (Sand goes down).
++
++Set grid[y][x] = 2 (Water moves up to take the Sand's place).
++
++Crucial: Mark both cells ([y+1][x] and [y][x]) as hasMoved = true to prevent them from being processed again this frame.
++
++Diagonals: Apply this same logic to the diagonal checks (down-left and down-right). If Sand sees Water diagonally below, it should swap with it.
++
++Keep the rest of the code exactly the same.
+
+# 2025-11-25 03:16:04.065833
++Currently, the Sand (1) acts as if Water (2) is a solid wall and stacks on top of it.
++
++Please update the Sand Logic inside the animate function to implement Density:
++
++Check Down: In the Sand logic, check if the cell directly below (y+1) is Empty (0) OR Water (2).
++
++The Swap: If the cell below is Water:
++
++Set grid[y+1][x] = 1 (Sand goes down).
++
++Set grid[y][x] = 2 (Water moves up to take the Sand's place).
++
++Crucial: Mark both cells ([y+1][x] and [y][x]) as hasMoved = true to prevent them from being processed again this frame.
++
++Diagonals: Apply this same logic to the diagonal checks (down-left and down-right). If Sand sees Water diagonally below, it should swap with it.
++
++Keep the rest of the code exactly the same.
