@@ -516,3 +516,69 @@
 +At the very start of the Smoke logic (else if (cell === 6)), add: if (Math.random() < 0.002) { grid[y][x] = 0; continue; }
 +
 +This gives every smoke particle a small chance to vanish every frame, creating a natural 'fading' effect over time.
+
+# 2025-11-25 04:48:06.673026
++I need to fix a critical physics bug and add the final 'Winning' features.
++
++1. Fix: Smoke Permeability (Gas Logic) Currently, Sand (1), Water (2), and Acid (7) stop moving when they hit Smoke (6) because the code only checks for Empty (0).
++
++Update Logic: For Sand, Water, and Acid, whenever checking a target cell (down or diagonal), check if it is Empty (0) OR Smoke (6).
++
++The Swap: If the target is Smoke (6), swap positions (Material goes to target, Smoke moves to origin). Mark both as hasMoved = true.
++
++Smoke Decay: Inside the Smoke logic loop, add if (Math.random() < 0.01) { grid[y][x] = 0; continue; } so smoke slowly fades away.
++
++2. New Feature: Life (Plants) - ID: 8
++
++Add Button: Add a 'Plant' button (Color: #228B22) to the toolbar.
++
++Growth Logic: Plants are static. However, if a Plant is adjacent to Water (2) (check 3px radius), it has a small chance (5%) to grow into a random adjacent Empty (0) cell. When it grows, remove the Water (it drinks it).
++
++Vulnerability: Plants catch Fire (5) just like Wood.
++
++3. New Feature: Brush Size Slider
++
++Add a state brushSize (default 1, max 5).
++
++Add an <input type='range'> to the UI.
++
++Update mouseMove to draw a circle of materials based on brushSize.
++
++4. Optimization
++
++Ensure the animate loop strictly uses the hasMoved matrix to prevent double-processing.
++
++Initialize the grid with a 'Stone Floor' at the bottom 5 rows so the simulation isn't empty on load.
+
+# 2025-11-25 04:48:06.675768
++I need to fix a critical physics bug and add the final 'Winning' features.
++
++1. Fix: Smoke Permeability (Gas Logic) Currently, Sand (1), Water (2), and Acid (7) stop moving when they hit Smoke (6) because the code only checks for Empty (0).
++
++Update Logic: For Sand, Water, and Acid, whenever checking a target cell (down or diagonal), check if it is Empty (0) OR Smoke (6).
++
++The Swap: If the target is Smoke (6), swap positions (Material goes to target, Smoke moves to origin). Mark both as hasMoved = true.
++
++Smoke Decay: Inside the Smoke logic loop, add if (Math.random() < 0.01) { grid[y][x] = 0; continue; } so smoke slowly fades away.
++
++2. New Feature: Life (Plants) - ID: 8
++
++Add Button: Add a 'Plant' button (Color: #228B22) to the toolbar.
++
++Growth Logic: Plants are static. However, if a Plant is adjacent to Water (2) (check 3px radius), it has a small chance (5%) to grow into a random adjacent Empty (0) cell. When it grows, remove the Water (it drinks it).
++
++Vulnerability: Plants catch Fire (5) just like Wood.
++
++3. New Feature: Brush Size Slider
++
++Add a state brushSize (default 1, max 5).
++
++Add an <input type='range'> to the UI.
++
++Update mouseMove to draw a circle of materials based on brushSize.
++
++4. Optimization
++
++Ensure the animate loop strictly uses the hasMoved matrix to prevent double-processing.
++
++Initialize the grid with a 'Stone Floor' at the bottom 5 rows so the simulation isn't empty on load.
