@@ -938,3 +938,25 @@
 +The Throttling: Wrap this sideways check in a probability: if (Math.random() < 0.1).
 +
 +Result: This allows the acid to spread flat, but only 10% of the time per frame, creating a slow 'oozing' effect.
+
+# 2025-11-26 16:23:40.338744
++Now that the physics are stable, please add Smoke Decay.
++
++Currently, Smoke (6) stays on screen forever.
++
++Please update the 'Smoke Logic' block inside the animate function: At the very beginning of the else if (cell === 6) block, add this decay logic:
++
++if (Math.random() < 0.015) { grid[y][x] = 0; hasMoved[y][x] = true; continue; }
++
++This will give smoke a lifetime of about 8-10 seconds before disappearing. Do not modify any other logic.
+
+# 2025-11-26 16:23:40.339158
++Now that the physics are stable, please add Smoke Decay.
++
++Currently, Smoke (6) stays on screen forever.
++
++Please update the 'Smoke Logic' block inside the animate function: At the very beginning of the else if (cell === 6) block, add this decay logic:
++
++if (Math.random() < 0.015) { grid[y][x] = 0; hasMoved[y][x] = true; continue; }
++
++This will give smoke a lifetime of about 8-10 seconds before disappearing. Do not modify any other logic.
