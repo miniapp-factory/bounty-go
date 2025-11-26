@@ -286,26 +286,47 @@ export default function FallingSand() {
           } else if (cell === 7) {
             // Acid logic
             if (y + 1 >= rows) continue;
-            const tryMove = (ny: number, nx: number) => {
-              if (ny < 0 || ny >= rows || nx < 0 || nx >= cols) return false;
-              const target = grid[ny][nx];
-              if (target === 0 || target === 6 || target === 2 || target === 4 || target === 8) {
-                if (target === 6) {
-                  grid[ny][nx] = 7;
-                  grid[y][x] = 6;
-                } else {
-                  grid[ny][nx] = 7;
-                  grid[y][x] = target;
-                }
-                hasMoved[ny][nx] = true;
+            // Gravity
+            if (!hasMoved[y + 1][x] && grid[y + 1][x] === 0) {
+              grid[y + 1][x] = 7;
+              grid[y][x] = 0;
+              hasMoved[y + 1][x] = true;
+              hasMoved[y][x] = true;
+              continue;
+            }
+            // Slopes
+            const diagOrder = Math.random() < 0.5 ? [{ dx: -1 }, { dx: 1 }] : [{ dx: 1 }, { dx: -1 }];
+            let moved = false;
+            for (const { dx } of diagOrder) {
+              const nx = x + dx;
+              if (nx < 0 || nx >= cols) continue;
+              if (!hasMoved[y + 1][nx] && grid[y + 1][nx] === 0) {
+                grid[y + 1][nx] = 7;
+                grid[y][x] = 0;
+                hasMoved[y + 1][nx] = true;
                 hasMoved[y][x] = true;
-                return true;
+                moved = true;
+                break;
               }
-              return false;
-            };
-            if (!hasMoved[y+1][x] && tryMove(y+1, x)) continue;
-            if (!hasMoved[y+1][x-1] && tryMove(y+1, x-1)) continue;
-            if (!hasMoved[y+1][x+1] && tryMove(y+1, x+1)) continue;
+            }
+            if (moved) continue;
+            // Viscous Spread
+            if (Math.random() < 0.1) {
+              const sideOrder = Math.random() < 0.5 ? [-1, 1] : [1, -1];
+              for (const dx of sideOrder) {
+                const nx = x + dx;
+                if (nx < 0 || nx >= cols) continue;
+                if (!hasMoved[y][nx] && grid[y][nx] === 0) {
+                  grid[y][nx] = 7;
+                  grid[y][x] = 0;
+                  hasMoved[y][nx] = true;
+                  hasMoved[y][x] = true;
+                  moved = true;
+                  break;
+                }
+              }
+            }
+            if (moved) continue;
             // corrosion
             for (let dy = -1; dy <= 1; dy++) {
               for (let dx = -1; dx <= 1; dx++) {
