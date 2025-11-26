@@ -273,6 +273,7 @@ export default function FallingSand() {
               hasMoved[y][x] = true;
             }
           } else if (cell === 6) {
+            if (Math.random() < 0.015) { grid[y][x] = 0; hasMoved[y][x] = true; continue; }
             // Smoke logic: rise
             if (y > 0 && !hasMoved[y-1][x]) {
               const above = grid[y-1][x];
