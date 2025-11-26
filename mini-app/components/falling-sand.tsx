@@ -285,6 +285,7 @@ export default function FallingSand() {
             }
           } else if (cell === 7) {
             // Acid logic
+            if (y + 1 >= rows) continue;
             const tryMove = (ny: number, nx: number) => {
               if (ny < 0 || ny >= rows || nx < 0 || nx >= cols) return false;
               const target = grid[ny][nx];
