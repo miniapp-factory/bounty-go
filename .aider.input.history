@@ -960,3 +960,37 @@
 +if (Math.random() < 0.015) { grid[y][x] = 0; hasMoved[y][x] = true; continue; }
 +
 +This will give smoke a lifetime of about 8-10 seconds before disappearing. Do not modify any other logic.
+
+# 2025-11-26 16:56:17.501900
++The Fire logic acts too erratically; it jumps into empty air even when there is no fuel.
++
++Please rewrite the Fire Logic block (cell === 5) inside the animate function with this strict change:
++
++Keep the Burn Out logic (turning to Smoke).
++
++Keep the Spread/Ignition logic (turning neighbors like Wood/Plant into Fire).
++
++Keep the Extinguish logic (Water kills Fire).
++
++DELETE the 'Move Erratically' block at the end of the fire section.
++
++Specifics: Remove the part where it checks grid[ny][nx] === 0 and moves the fire there. Fire should not move on its own; it should only exist where it ignited something.
++
++Please output the full, corrected code.
+
+# 2025-11-26 16:56:17.502344
++The Fire logic acts too erratically; it jumps into empty air even when there is no fuel.
++
++Please rewrite the Fire Logic block (cell === 5) inside the animate function with this strict change:
++
++Keep the Burn Out logic (turning to Smoke).
++
++Keep the Spread/Ignition logic (turning neighbors like Wood/Plant into Fire).
++
++Keep the Extinguish logic (Water kills Fire).
++
++DELETE the 'Move Erratically' block at the end of the fire section.
++
++Specifics: Remove the part where it checks grid[ny][nx] === 0 and moves the fire there. Fire should not move on its own; it should only exist where it ignited something.
++
++Please output the full, corrected code.
