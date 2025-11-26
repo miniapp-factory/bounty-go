@@ -251,23 +251,6 @@ export default function FallingSand() {
               if (combusted) break;
             }
             if (combusted) continue;
-            const dirs = [
-              [-1, -1], [0, -1], [1, -1],
-              [-1, 0],          [1, 0],
-              [-1, 1], [0, 1], [1, 1]
-            ];
-            const shuffled = dirs.sort(() => Math.random() - 0.5);
-            for (const [dx, dy] of shuffled) {
-              const nx = x + dx, ny = y + dy;
-              if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
-              if (grid[ny][nx] === 0 && !hasMoved[ny][nx]) {
-                grid[ny][nx] = 5;
-                grid[y][x] = 0;
-                hasMoved[ny][nx] = true;
-                hasMoved[y][x] = true;
-                break;
-              }
-            }
             if (Math.random() < 0.05) {
               grid[y][x] = 6;
               hasMoved[y][x] = true;
