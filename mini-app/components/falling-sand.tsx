@@ -284,26 +284,28 @@ export default function FallingSand() {
               }
             }
           } else if (cell === 7) {
-            // Acid logic: same as water movement
-            if (y + 1 < rows && grid[y+1][x] === 0 && !hasMoved[y+1][x]) {
-              grid[y+1][x] = 7;
-              grid[y][x] = 0;
-              hasMoved[y+1][x] = true;
-              hasMoved[y][x] = true;
-            } else {
-              // Handle smoke swap
-              if (grid[y][x-1] === 6 && !hasMoved[y][x-1]) {
-                grid[y][x-1] = 7;
-                grid[y][x] = 6;
-                hasMoved[y][x-1] = true;
+            // Acid logic
+            const tryMove = (ny: number, nx: number) => {
+              if (ny < 0 || ny >= rows || nx < 0 || nx >= cols) return false;
+              const target = grid[ny][nx];
+              if (target === 0 || target === 6 || target === 2 || target === 4 || target === 8) {
+                if (target === 6) {
+                  grid[ny][nx] = 7;
+                  grid[y][x] = 6;
+                } else {
+                  grid[ny][nx] = 7;
+                  grid[y][x] = target;
+                }
+                hasMoved[ny][nx] = true;
                 hasMoved[y][x] = true;
-              } else if (grid[y][x+1] === 6 && !hasMoved[y][x+1]) {
-                grid[y][x+1] = 7;
-                grid[y][x] = 6;
-                hasMoved[y][x+1] = true;
-                hasMoved[y][x] = true;
+                return true;
               }
-            }
+              return false;
+            };
+            if (!hasMoved[y+1][x] && tryMove(y+1, x)) continue;
+            if (!hasMoved[y+1][x-1] && tryMove(y+1, x-1)) continue;
+            if (!hasMoved[y+1][x+1] && tryMove(y+1, x+1)) continue;
+            // corrosion
             for (let dy = -1; dy <= 1; dy++) {
               for (let dx = -1; dx <= 1; dx++) {
                 if (dx === 0 && dy === 0) continue;
@@ -429,6 +431,13 @@ export default function FallingSand() {
         >
           Acid
         </button>
+      <button
+        className={`btn ${selectedMaterial === 8 ? 'selected' : ''}`}
+        onClick={() => setSelectedMaterial(8)}
+        style={{ backgroundColor: selectedMaterial === 8 ? '#228B22' : '' }}
+      >
+        Plant
+      </button>
       <input
         type="range"
         min="1"
