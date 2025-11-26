@@ -900,3 +900,41 @@
 +Please fix this by adding a boundary check: Inside the else if (cell === 7) block, make the very first line: if (y + 1 >= rows) continue;
 +
 +Do not change any other logic yet, just prevent the crash.
+
+# 2025-11-26 15:51:51.689544
++want to adjust the Acid physics to behave like 'Thick Water'. It should flatten out over time, but flow much slower than water.
++
++Please rewrite the Acid Logic Block (inside animate) with this exact priority order:
++
++Boundary Guard: Keep if (y + 1 >= rows) continue; at the top.
++
++Gravity (Priority 1): Check Down (y+1). If valid, move there.
++
++Slopes (Priority 2): If Down is blocked, check Diagonals (y+1, x+1 OR y+1, x-1). Randomize the order. If valid, move there.
++
++Viscous Spread (Priority 3 - NEW):
++
++If Down and Diagonals are blocked, check Sideways (x-1 OR x+1).
++
++The Throttling: Wrap this sideways check in a probability: if (Math.random() < 0.1).
++
++Result: This allows the acid to spread flat, but only 10% of the time per frame, creating a slow 'oozing' effect.
+
+# 2025-11-26 15:51:51.689996
++want to adjust the Acid physics to behave like 'Thick Water'. It should flatten out over time, but flow much slower than water.
++
++Please rewrite the Acid Logic Block (inside animate) with this exact priority order:
++
++Boundary Guard: Keep if (y + 1 >= rows) continue; at the top.
++
++Gravity (Priority 1): Check Down (y+1). If valid, move there.
++
++Slopes (Priority 2): If Down is blocked, check Diagonals (y+1, x+1 OR y+1, x-1). Randomize the order. If valid, move there.
++
++Viscous Spread (Priority 3 - NEW):
++
++If Down and Diagonals are blocked, check Sideways (x-1 OR x+1).
++
++The Throttling: Wrap this sideways check in a probability: if (Math.random() < 0.1).
++
++Result: This allows the acid to spread flat, but only 10% of the time per frame, creating a slow 'oozing' effect.
