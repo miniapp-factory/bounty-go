@@ -820,3 +820,65 @@
 +You forgot the decay line.
 +
 +Action: At the very top of the else if (cell === 6) block: if (Math.random() < 0.01) { grid[y][x] = 0; hasMoved[y][x] = true; continue; }
+
+# 2025-11-26 14:46:46.470788
++The current file is corrupted with duplicate code. Please replace the entire file contents of components/falling-sand.tsx with a single, complete version.
++
++Requirement: Output the FULL code. Do not output snippets. Include:
++
++All Imports: (useState, useEffect, useRef).
++
++All State: (selectedMaterial, brushSize, gridRef, etc.).
++
++Setup: The useEffect for window resizing and canvas context.
++
++Initialization: The loop that creates the 'Stone Floor' at the bottom.
++
++Interaction: The mouseMove, mouseDown, mouseUp handlers.
++
++Animation Loop (The Fixes):
++
++Start with: if (y + 1 >= rows) continue; inside the Acid block (Fixes Crash).
++
++Acid: Move Down first, then Diagonal. No sideways checks.
++
++Smoke: Include the decay line: if (Math.random() < 0.015) ...
++
++Plants: Include the logic to drink water and grow.
++
++Render Loop: The canvas drawing logic for all 8 colors.
++
++UI: The toolbar with all buttons (including Plant) and the Slider inside it.
++
++Generate the complete, compilable file now.
+
+# 2025-11-26 14:46:46.471233
++The current file is corrupted with duplicate code. Please replace the entire file contents of components/falling-sand.tsx with a single, complete version.
++
++Requirement: Output the FULL code. Do not output snippets. Include:
++
++All Imports: (useState, useEffect, useRef).
++
++All State: (selectedMaterial, brushSize, gridRef, etc.).
++
++Setup: The useEffect for window resizing and canvas context.
++
++Initialization: The loop that creates the 'Stone Floor' at the bottom.
++
++Interaction: The mouseMove, mouseDown, mouseUp handlers.
++
++Animation Loop (The Fixes):
++
++Start with: if (y + 1 >= rows) continue; inside the Acid block (Fixes Crash).
++
++Acid: Move Down first, then Diagonal. No sideways checks.
++
++Smoke: Include the decay line: if (Math.random() < 0.015) ...
++
++Plants: Include the logic to drink water and grow.
++
++Render Loop: The canvas drawing logic for all 8 colors.
++
++UI: The toolbar with all buttons (including Plant) and the Slider inside it.
++
++Generate the complete, compilable file now.
