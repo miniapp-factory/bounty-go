@@ -722,3 +722,51 @@
 +Ensure the grid initialization adds the 'Stone Floor' (last 5 rows) correctly.
 +
 +Please output the full, corrected code.
+
+# 2025-11-26 07:23:28.026606
++The previous code was defective. It completely ignored the Smoke Decay logic and the UI layout instructions.
++
++Please rewrite the entire component with these 4 specific fixes applied:
++
++1. FIX: Smoke Decay (Priority) Currently, smoke lasts forever.
++
++Action: Inside the animate loop for Smoke (6), add this line at the very top of the block: if (Math.random() < 0.01) { grid[y][x] = 0; hasMoved[y][x] = true; continue; }
++
++This creates a probability that smoke particles vanish every frame (~8 seconds lifetime).
++
++2. FIX: Acid 'Bleeding' Bug Currently, Acid (7) flows sideways like water. It should be sludge.
++
++Action: In the Acid logic, DELETE the else { ... } block that checks for leftEmpty and rightEmpty.
++
++Acid should only check below (y+1) and diagonals (y+1, x±1). If it can't move down, it stops.
++
++3. FIX: Invisible Slider
++
++Action: Move the <input type="range"> INSIDE the <div className="toolbar ..."> container. Currently, it is outside and invisible.
++
++Please generate the full, corrected code.
++
+
+# 2025-11-26 07:23:28.027257
++The previous code was defective. It completely ignored the Smoke Decay logic and the UI layout instructions.
++
++Please rewrite the entire component with these 4 specific fixes applied:
++
++1. FIX: Smoke Decay (Priority) Currently, smoke lasts forever.
++
++Action: Inside the animate loop for Smoke (6), add this line at the very top of the block: if (Math.random() < 0.01) { grid[y][x] = 0; hasMoved[y][x] = true; continue; }
++
++This creates a probability that smoke particles vanish every frame (~8 seconds lifetime).
++
++2. FIX: Acid 'Bleeding' Bug Currently, Acid (7) flows sideways like water. It should be sludge.
++
++Action: In the Acid logic, DELETE the else { ... } block that checks for leftEmpty and rightEmpty.
++
++Acid should only check below (y+1) and diagonals (y+1, x±1). If it can't move down, it stops.
++
++3. FIX: Invisible Slider
++
++Action: Move the <input type="range"> INSIDE the <div className="toolbar ..."> container. Currently, it is outside and invisible.
++
++Please generate the full, corrected code.
++
