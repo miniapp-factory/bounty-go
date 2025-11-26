@@ -770,3 +770,53 @@
 +
 +Please generate the full, corrected code.
 +
+
+# 2025-11-26 07:53:01.590561
++The previous code was incomplete. It is missing the Logic Blocks for Plants and Smoke Decay, and the Acid physics are wrong.
++
++Please rewrite the animate function and the full component with these strict fixes:
++
++1. FIX: Acid Physics (Viscous Flow + Smoke Passthrough) Currently, Acid piles up (doesn't flow) or bleeds sideways. It needs to slide down slopes.
++
++Movement Rules: Acid (7) tries to move to a 'Target' cell.
++
++Valid Targets: A cell is valid if it is Empty (0) OR Smoke (6).
++
++Priority:
++
++Check Down (y+1): If valid, move there (Swap if smoke).
++
++Check Diagonals (y+1, x-1 OR y+1, x+1): If Down is blocked, check diagonals. If valid, move there (Swap if smoke).
++
++CRITICAL: Do NOT check x-1 or x+1 (Sideways). Only Down and Diagonals. This creates the 'Sludge' flow effect.
++
++2. FIX: Smoke Decay
++
++You forgot the decay line.
++
++Action: At the very top of the else if (cell === 6) block: if (Math.random() < 0.01) { grid[y][x] = 0; hasMoved[y][x] = true; continue; }
+
+# 2025-11-26 07:53:01.591079
++The previous code was incomplete. It is missing the Logic Blocks for Plants and Smoke Decay, and the Acid physics are wrong.
++
++Please rewrite the animate function and the full component with these strict fixes:
++
++1. FIX: Acid Physics (Viscous Flow + Smoke Passthrough) Currently, Acid piles up (doesn't flow) or bleeds sideways. It needs to slide down slopes.
++
++Movement Rules: Acid (7) tries to move to a 'Target' cell.
++
++Valid Targets: A cell is valid if it is Empty (0) OR Smoke (6).
++
++Priority:
++
++Check Down (y+1): If valid, move there (Swap if smoke).
++
++Check Diagonals (y+1, x-1 OR y+1, x+1): If Down is blocked, check diagonals. If valid, move there (Swap if smoke).
++
++CRITICAL: Do NOT check x-1 or x+1 (Sideways). Only Down and Diagonals. This creates the 'Sludge' flow effect.
++
++2. FIX: Smoke Decay
++
++You forgot the decay line.
++
++Action: At the very top of the else if (cell === 6) block: if (Math.random() < 0.01) { grid[y][x] = 0; hasMoved[y][x] = true; continue; }
