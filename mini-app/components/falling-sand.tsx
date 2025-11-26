@@ -291,36 +291,6 @@ export default function FallingSand() {
               hasMoved[y+1][x] = true;
               hasMoved[y][x] = true;
             } else {
-              const leftEmpty = x > 0 && grid[y][x-1] === 0 && !hasMoved[y][x-1];
-              const rightEmpty = x < cols-1 && grid[y][x+1] === 0 && !hasMoved[y][x+1];
-              if (leftEmpty || rightEmpty) {
-                const tryLeftFirst = Math.random() < 0.5;
-                if (tryLeftFirst) {
-                  if (leftEmpty) {
-                    grid[y][x-1] = 7;
-                    grid[y][x] = 0;
-                    hasMoved[y][x-1] = true;
-                    hasMoved[y][x] = true;
-                  } else if (rightEmpty) {
-                    grid[y][x+1] = 7;
-                    grid[y][x] = 0;
-                    hasMoved[y][x+1] = true;
-                    hasMoved[y][x] = true;
-                  }
-                } else {
-                  if (rightEmpty) {
-                    grid[y][x+1] = 7;
-                    grid[y][x] = 0;
-                    hasMoved[y][x+1] = true;
-                    hasMoved[y][x] = true;
-                  } else if (leftEmpty) {
-                    grid[y][x-1] = 7;
-                    grid[y][x] = 0;
-                    hasMoved[y][x-1] = true;
-                    hasMoved[y][x] = true;
-                  }
-                }
-              }
               // Handle smoke swap
               if (grid[y][x-1] === 6 && !hasMoved[y][x-1]) {
                 grid[y][x-1] = 7;
@@ -459,7 +429,6 @@ export default function FallingSand() {
         >
           Acid
         </button>
-      </div>
       <input
         type="range"
         min="1"
@@ -468,6 +437,7 @@ export default function FallingSand() {
         onChange={e => setBrushSize(Number(e.target.value))}
         className="slider"
       />
+      </div>
       <button
         className="btn"
         onClick={() => {
