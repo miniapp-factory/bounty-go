@@ -1164,3 +1164,89 @@
 +Keep the Acid (Sludge), Fire (Fuel-based), and Smoke (Decay) logic exactly as they are.
 +
 +Output the full code.
+
+# 2025-11-27 17:33:44.730923
++The current scenarios look too geometric and the colors are unrealistic (Stone is purple).
++
++Please replace the loadScenario function and the Render Colors with this improved version:
++
++1. Update Colors (In the Render Loop):
++
++Change Stone (3) to #808080 (Grey).
++
++Change Acid (7) to #32CD32 (Lime Green).
++
++Change Wood (4) to #8B4513 (SaddleBrown).
++
++2. Rewrite loadScenario with Organic Logic: Replace the current function with this procedural generation logic:
++
++'Volcano':
++
++Draw a mountain shape, but add Math.random() * 5 to the height at each column so it looks rugged/rocky, not straight.
++
++Make the center column (width 6) filled with Fire (5) all the way down.
++
++Add random 'magma pockets' of Fire inside the stone mountain.
++
++'Hazard':
++
++Draw a Stone (3) container (a cup shape) floating in the middle of the screen.
++
++Fill it with Acid (7).
++
++Support the stone container with thin Wood (4) legs.
++
++Goal: The user can burn the wood legs to drop the acid.
++
++'Oasis':
++
++Draw a curved 'valley' shape using sine waves or randomness for the floor.
++
++Fill the bottom of the valley with Water (2).
++
++Scatter Plant (8) pixels on the surface of the water and the stone banks.
++
++Please output the updated loadScenario function and the updated color section of the render loop.
+
+# 2025-11-27 17:33:44.731318
++The current scenarios look too geometric and the colors are unrealistic (Stone is purple).
++
++Please replace the loadScenario function and the Render Colors with this improved version:
++
++1. Update Colors (In the Render Loop):
++
++Change Stone (3) to #808080 (Grey).
++
++Change Acid (7) to #32CD32 (Lime Green).
++
++Change Wood (4) to #8B4513 (SaddleBrown).
++
++2. Rewrite loadScenario with Organic Logic: Replace the current function with this procedural generation logic:
++
++'Volcano':
++
++Draw a mountain shape, but add Math.random() * 5 to the height at each column so it looks rugged/rocky, not straight.
++
++Make the center column (width 6) filled with Fire (5) all the way down.
++
++Add random 'magma pockets' of Fire inside the stone mountain.
++
++'Hazard':
++
++Draw a Stone (3) container (a cup shape) floating in the middle of the screen.
++
++Fill it with Acid (7).
++
++Support the stone container with thin Wood (4) legs.
++
++Goal: The user can burn the wood legs to drop the acid.
++
++'Oasis':
++
++Draw a curved 'valley' shape using sine waves or randomness for the floor.
++
++Fill the bottom of the valley with Water (2).
++
++Scatter Plant (8) pixels on the surface of the water and the stone banks.
++
++Please output the updated loadScenario function and the updated color section of the render loop.
