@@ -378,7 +378,68 @@ export default function FallingSand() {
     selectedMaterialRef.current = selectedMaterial;
   }, [selectedMaterial]);  // keep ref in sync with selectedMaterial
 
-  return (
+function loadScenario(type: string) {
+  if (!gridRef.current || !setCellRef.current) return;
+  const grid = gridRef.current;
+  const setCell = setCellRef.current;
+  const rows = rowsRef.current;
+  const cols = colsRef.current;
+  // clear grid
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      setCell(x, y, 0);
+    }
+  }
+  if (type === 'Volcano') {
+    const center = Math.floor(cols / 2);
+    const height = Math.floor(rows / 4);
+    for (let y = 0; y < height; y++) {
+      const start = center - y;
+      const end = center + y;
+      for (let x = start; x <= end; x++) {
+        setCell(x, y, 3);
+      }
+    }
+    for (let y = 0; y < rows; y++) {
+      setCell(center, y, 5);
+    }
+  } else if (type === 'Hazard') {
+    const midRow = Math.floor(rows / 2);
+    for (let x = 0; x < cols; x++) {
+      setCell(x, midRow, 4);
+    }
+    const blobSize = 10;
+    const startX = Math.floor((cols - blobSize) / 2);
+    const startY = midRow - blobSize - 2;
+    for (let y = 0; y < blobSize; y++) {
+      for (let x = 0; x < blobSize; x++) {
+        setCell(startX + x, startY + y, 7);
+      }
+    }
+  } else if (type === 'Oasis') {
+    const basinHeight = Math.floor(rows / 4);
+    const startRow = rows - basinHeight;
+    for (let y = startRow; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        setCell(x, y, 3);
+      }
+    }
+    for (let y = startRow; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        setCell(x, y, 2);
+      }
+    }
+    for (let x = 0; x < cols; x += Math.floor(cols / 5)) {
+      setCell(x, startRow, 8);
+      setCell(x, rows - 1, 8);
+    }
+    for (let y = startRow; y < rows; y += Math.floor(rows / 5)) {
+      setCell(0, y, 8);
+      setCell(cols - 1, y, 8);
+    }
+  }
+}
+return (
     <>
       <div className="toolbar fixed top-4 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-white/20 backdrop-blur-md z-50 p-2 rounded-md">
         <button
@@ -452,6 +513,11 @@ export default function FallingSand() {
         onChange={e => setBrushSize(Number(e.target.value))}
         className="slider"
       />
+      </div>
+      <div className="scenario-toolbar fixed top-12 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-white/20 backdrop-blur-md z-50 p-2 rounded-md">
+        <button className="btn" style={{backgroundColor:'#ff4500'}} onClick={() => loadScenario('Volcano')}>Volcano</button>
+        <button className="btn" style={{backgroundColor:'#8b4513'}} onClick={() => loadScenario('Hazard')}>Hazard</button>
+        <button className="btn" style={{backgroundColor:'#228B22'}} onClick={() => loadScenario('Oasis')}>Oasis</button>
       </div>
       <button
         className="btn"
