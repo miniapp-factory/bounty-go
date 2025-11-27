@@ -994,3 +994,33 @@
 +Specifics: Remove the part where it checks grid[ny][nx] === 0 and moves the fire there. Fire should not move on its own; it should only exist where it ignited something.
 +
 +Please output the full, corrected code.
+
+# 2025-11-27 10:48:50.322046
++The Plant (8) logic is currently broken: it is static (doesn't grow) and Acid (7) does not dissolve it.
++
++Please rewrite the animate function with these Strict Fixes:
++
++1. FIX: Acid vs. Plant (Corrosion)
++
++Inside the Acid (cell === 7) corrosion loop, you are checking neighbors.
++
++Action: Ensure the check explicitly includes neighbor === 8.
++
++Code: if ((neighbor === 3 || neighbor === 4 || neighbor === 1 || neighbor === 8) && ...)
++
++This ensures Acid eats Plants just like it eats Wood.
+
+# 2025-11-27 10:48:50.322392
++The Plant (8) logic is currently broken: it is static (doesn't grow) and Acid (7) does not dissolve it.
++
++Please rewrite the animate function with these Strict Fixes:
++
++1. FIX: Acid vs. Plant (Corrosion)
++
++Inside the Acid (cell === 7) corrosion loop, you are checking neighbors.
++
++Action: Ensure the check explicitly includes neighbor === 8.
++
++Code: if ((neighbor === 3 || neighbor === 4 || neighbor === 1 || neighbor === 8) && ...)
++
++This ensures Acid eats Plants just like it eats Wood.
