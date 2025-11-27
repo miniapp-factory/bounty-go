@@ -1098,3 +1098,23 @@
 +Water Absorption: Check immediate neighbors (dx/dy from -1 to 1). If a neighbor is Water (2), turn it to 0 and set a local nourished flag to true.
 +
 +Growth: If nourished is true, have a 10% chance to spawn a new Plant (8) in a random valid empty neighbor. Ensure you use hasMoved to prevent infinite growth in one frame.
+
+# 2025-11-27 15:34:46.632749
++To ensure a clean implementation, please REMOVE the entire else if (cell === 8) block from the animate function if it exists.
++
++I want to completely discard the current Plant logic so we can insert the correct version in the next step. Do not modify the Acid, Fire, or Smoke logic.
+
+# 2025-11-27 15:34:46.633204
++To ensure a clean implementation, please REMOVE the entire else if (cell === 8) block from the animate function if it exists.
++
++I want to completely discard the current Plant logic so we can insert the correct version in the next step. Do not modify the Acid, Fire, or Smoke logic.
+
+# 2025-11-27 16:32:35.973843
++To ensure a clean implementation, please REMOVE the entire else if (cell === 8) block from the animate function if it exists.
++
++I want to completely discard the current Plant logic so we can insert the correct version in the next step. Do not modify the Acid, Fire, or Smoke logic.
+
+# 2025-11-27 16:32:35.974513
++To ensure a clean implementation, please REMOVE the entire else if (cell === 8) block from the animate function if it exists.
++
++I want to completely discard the current Plant logic so we can insert the correct version in the next step. Do not modify the Acid, Fire, or Smoke logic.
