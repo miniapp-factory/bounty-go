@@ -1084,3 +1084,17 @@
 +Direction Bias: Prioritize growing UP (y-1) or Diagonally Up (y-1, x±1) to simulate vines seeking light.
 +
 +Constraint: Check if there are already too many plant neighbors (>4). If so, do not grow (prevents blobbing).
+
+# 2025-11-27 15:03:55.755179
++I need to implement the basic behavior for Plants (ID 8). Currently, they are static. Please add (cell === 8) block check inside the animate function to include:
++
++Water Absorption: Check immediate neighbors (dx/dy from -1 to 1). If a neighbor is Water (2), turn it to 0 and set a local nourished flag to true.
++
++Growth: If nourished is true, have a 10% chance to spawn a new Plant (8) in a random valid empty neighbor. Ensure you use hasMoved to prevent infinite growth in one frame.
+
+# 2025-11-27 15:03:55.755564
++I need to implement the basic behavior for Plants (ID 8). Currently, they are static. Please add (cell === 8) block check inside the animate function to include:
++
++Water Absorption: Check immediate neighbors (dx/dy from -1 to 1). If a neighbor is Water (2), turn it to 0 and set a local nourished flag to true.
++
++Growth: If nourished is true, have a 10% chance to spawn a new Plant (8) in a random valid empty neighbor. Ensure you use hasMoved to prevent infinite growth in one frame.
