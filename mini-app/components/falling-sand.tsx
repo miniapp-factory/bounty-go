@@ -318,7 +318,7 @@ export default function FallingSand() {
                 const nx = x + dx, ny = y + dy;
                 if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
                 const target = grid[ny][nx];
-                if ((target === 3 || target === 4 || target === 1) && !hasMoved[ny][nx]) {
+                if ((target === 3 || target === 4 || target === 1 || target === 8) && !hasMoved[ny][nx]) {
                   grid[y][x] = 0;
                   grid[ny][nx] = 0;
                   hasMoved[y][x] = true;
