@@ -343,11 +343,11 @@ export default function FallingSand() {
           const cell = grid[y][x];
           if (cell === 1) ctx.fillStyle = "#ffae00";
           else if (cell === 2) ctx.fillStyle = "#00ffff";
-          else if (cell === 3) ctx.fillStyle = "#8a2be2";
+          else if (cell === 3) ctx.fillStyle = "#808080";
           else if (cell === 4) ctx.fillStyle = "#8b4513";
           else if (cell === 5) ctx.fillStyle = Math.random() < 0.5 ? "#ff4500" : "#ff8c00";
           else if (cell === 6) ctx.fillStyle = "#555555";
-          else if (cell === 7) ctx.fillStyle = "#00ff00";
+          else if (cell === 7) ctx.fillStyle = "#32CD32";
           else if (cell === 8) ctx.fillStyle = "#228B22";
           else continue;
           ctx.fillRect(
@@ -392,50 +392,67 @@ function loadScenario(type: string) {
   }
   if (type === 'Volcano') {
     const center = Math.floor(cols / 2);
-    const height = Math.floor(rows / 4);
-    for (let y = 0; y < height; y++) {
-      const start = center - y;
-      const end = center + y;
-      for (let x = start; x <= end; x++) {
+    const maxHeight = Math.floor(rows * 0.4);
+    for (let x = 0; x < cols; x++) {
+      const height = Math.floor(Math.random() * 5) + Math.floor((1 - Math.abs(x - center) / (cols / 2)) * maxHeight);
+      for (let y = 0; y < height; y++) {
         setCell(x, y, 3);
       }
+      // magma pockets
+      if (Math.random() < 0.1) {
+        const pocketHeight = Math.floor(Math.random() * 3) + 1;
+        for (let y = 0; y < pocketHeight; y++) {
+          setCell(x, Math.floor(Math.random() * height), 5);
+        }
+      }
     }
+    // center column fire
     for (let y = 0; y < rows; y++) {
       setCell(center, y, 5);
     }
   } else if (type === 'Hazard') {
-    const midRow = Math.floor(rows / 2);
-    for (let x = 0; x < cols; x++) {
-      setCell(x, midRow, 4);
+    const cupHeight = Math.floor(rows * 0.2);
+    const cupWidth = Math.floor(cols * 0.3);
+    const startX = Math.floor((cols - cupWidth) / 2);
+    const startY = Math.floor(rows * 0.4);
+    // cup walls
+    for (let y = startY; y < startY + cupHeight; y++) {
+      for (let x = startX; x < startX + cupWidth; x++) {
+        if (x === startX || x === startX + cupWidth - 1 || y === startY + cupHeight - 1) {
+          setCell(x, y, 3);
+        }
+      }
     }
-    const blobSize = 10;
-    const startX = Math.floor((cols - blobSize) / 2);
-    const startY = midRow - blobSize - 2;
-    for (let y = 0; y < blobSize; y++) {
-      for (let x = 0; x < blobSize; x++) {
-        setCell(startX + x, startY + y, 7);
+    // fill with acid
+    for (let y = startY + 1; y < startY + cupHeight - 1; y++) {
+      for (let x = startX + 1; x < startX + cupWidth - 1; x++) {
+        setCell(x, y, 7);
+      }
+    }
+    // wood legs
+    const legHeight = Math.floor(rows * 0.15);
+    const legWidth = Math.floor(cupWidth / 4);
+    const legPositions = [startX + Math.floor(legWidth / 2), startX + cupWidth - Math.floor(legWidth / 2) - 1];
+    for (const lx of legPositions) {
+      for (let y = startY + cupHeight; y < startY + cupHeight + legHeight; y++) {
+        setCell(lx, y, 4);
       }
     }
   } else if (type === 'Oasis') {
-    const basinHeight = Math.floor(rows / 4);
-    const startRow = rows - basinHeight;
-    for (let y = startRow; y < rows; y++) {
-      for (let x = 0; x < cols; x++) {
+    const valleyDepth = Math.floor(rows * 0.3);
+    for (let x = 0; x < cols; x++) {
+      const yBase = Math.floor(rows * 0.7 + Math.sin((x / cols) * Math.PI * 4) * valleyDepth);
+      for (let y = yBase; y < rows; y++) {
         setCell(x, y, 3);
       }
-    }
-    for (let y = startRow; y < rows; y++) {
-      for (let x = 0; x < cols; x++) {
-        setCell(x, y, 2);
+      // water
+      for (let y = yBase + 1; y < yBase + 2; y++) {
+        if (y < rows) setCell(x, y, 2);
       }
-    }
-    for (let x = 0; x < cols; x += Math.floor(cols / 5)) {
-      setCell(x, startRow, 8);
-      setCell(x, rows - 1, 8);
-    }
-    for (let y = startRow; y < rows; y += Math.floor(rows / 5)) {
-      setCell(0, y, 8);
-      setCell(cols - 1, y, 8);
+      // plants on banks
+      if (Math.random() < 0.05) {
+        setCell(x, yBase - 1, 8);
+      }
     }
   }
 }
