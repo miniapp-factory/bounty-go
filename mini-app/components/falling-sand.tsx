@@ -393,22 +393,27 @@ function loadScenario(type: string) {
   if (type === 'Volcano') {
     const center = Math.floor(cols / 2);
     const maxHeight = Math.floor(rows * 0.4);
+    // compute center column height
+    const centerHeight = Math.floor(Math.random() * 5) + maxHeight;
     for (let x = 0; x < cols; x++) {
       const height = Math.floor(Math.random() * 5) + Math.floor((1 - Math.abs(x - center) / (cols / 2)) * maxHeight);
-      for (let y = 0; y < height; y++) {
+      for (let y = rows - 1; y >= rows - height; y--) {
         setCell(x, y, 3);
       }
       // magma pockets
       if (Math.random() < 0.1) {
         const pocketHeight = Math.floor(Math.random() * 3) + 1;
         for (let y = 0; y < pocketHeight; y++) {
-          setCell(x, Math.floor(Math.random() * height), 5);
+          const pocketY = rows - Math.floor(Math.random() * height) - 1;
+          setCell(x, pocketY, 5);
         }
       }
     }
-    // center column fire
-    for (let y = 0; y < rows; y++) {
-      setCell(center, y, 5);
+    // center pipe fire, 4 tiles wide
+    for (let offset = -1; offset <= 2; offset++) {
+      for (let y = rows - 1; y >= rows - centerHeight; y--) {
+        setCell(center + offset, y, 5);
+      }
     }
   } else if (type === 'Hazard') {
     const cupHeight = Math.floor(rows * 0.2);
