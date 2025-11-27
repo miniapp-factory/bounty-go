@@ -1118,3 +1118,49 @@
 +To ensure a clean implementation, please REMOVE the entire else if (cell === 8) block from the animate function if it exists.
 +
 +I want to completely discard the current Plant logic so we can insert the correct version in the next step. Do not modify the Acid, Fire, or Smoke logic.
+
+# 2025-11-27 16:55:21.527927
++NEW FEATURE: Scenario Loader:
++
++Create a function loadScenario(type) inside the component.
++
++'Volcano': Clear grid. Draw a large triangle of Stone (3). Fill the center column with Fire (5).
++
++'Hazard': Clear grid. Draw a horizontal Wood (4) platform in the middle. Place a 10x10 blob of Acid (7) floating above it. (This demos the corrosion/sludge physics).
++
++'Oasis': Clear grid. Draw a Stone (3) basin at the bottom. Fill it with Water (2). Place a few Plant (8) pixels on the edges.
++
++3. UI UPDATE:
++
++Add a new div below the main toolbar containing buttons for: [Volcano] [Hazard] [Oasis].
++
++Style them nicely (small gap, different colors).
++
++4. PRESERVE PHYSICS:
++
++Keep the Acid (Sludge), Fire (Fuel-based), and Smoke (Decay) logic exactly as they are.
++
++Output the full code.
+
+# 2025-11-27 16:55:21.528462
++NEW FEATURE: Scenario Loader:
++
++Create a function loadScenario(type) inside the component.
++
++'Volcano': Clear grid. Draw a large triangle of Stone (3). Fill the center column with Fire (5).
++
++'Hazard': Clear grid. Draw a horizontal Wood (4) platform in the middle. Place a 10x10 blob of Acid (7) floating above it. (This demos the corrosion/sludge physics).
++
++'Oasis': Clear grid. Draw a Stone (3) basin at the bottom. Fill it with Water (2). Place a few Plant (8) pixels on the edges.
++
++3. UI UPDATE:
++
++Add a new div below the main toolbar containing buttons for: [Volcano] [Hazard] [Oasis].
++
++Style them nicely (small gap, different colors).
++
++4. PRESERVE PHYSICS:
++
++Keep the Acid (Sludge), Fire (Fuel-based), and Smoke (Decay) logic exactly as they are.
++
++Output the full code.
