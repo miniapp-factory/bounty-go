@@ -1250,3 +1250,33 @@
 +Scatter Plant (8) pixels on the surface of the water and the stone banks.
 +
 +Please output the updated loadScenario function and the updated color section of the render loop.
+
+# 2025-11-27 17:59:27.934385
++The 'Volcano' scenario is drawing upside down (hanging from the ceiling) because the canvas Y-axis starts at 0 at the top.
++
++Please fix the loadScenario function for the 'Volcano' case:
++
++1. Fix the Y-Loop (Draw from Bottom Up): Instead of for (let y = 0; y < height; y++), draw from the floor upwards: for (let y = rows - 1; y >= rows - height; y--)
++
++2. Fix the Magma Pockets: Ensure the random Fire pockets are also placed relative to the floor (rows - ...) so they appear inside the mountain, not in the sky.
++
++3. Fix the Center Pipe: Draw the central fire column from the floor (rows-1) up to the top of the crater, not from 0 down.
++
++4. Expand the central fire column by 4 tiles from the center
++
++Please output the corrected loadScenario function.
+
+# 2025-11-27 17:59:27.934829
++The 'Volcano' scenario is drawing upside down (hanging from the ceiling) because the canvas Y-axis starts at 0 at the top.
++
++Please fix the loadScenario function for the 'Volcano' case:
++
++1. Fix the Y-Loop (Draw from Bottom Up): Instead of for (let y = 0; y < height; y++), draw from the floor upwards: for (let y = rows - 1; y >= rows - height; y--)
++
++2. Fix the Magma Pockets: Ensure the random Fire pockets are also placed relative to the floor (rows - ...) so they appear inside the mountain, not in the sky.
++
++3. Fix the Center Pipe: Draw the central fire column from the floor (rows-1) up to the top of the crater, not from 0 down.
++
++4. Expand the central fire column by 4 tiles from the center
++
++Please output the corrected loadScenario function.
