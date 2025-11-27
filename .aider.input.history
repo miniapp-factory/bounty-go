@@ -1024,3 +1024,33 @@
 +Code: if ((neighbor === 3 || neighbor === 4 || neighbor === 1 || neighbor === 8) && ...)
 +
 +This ensures Acid eats Plants just like it eats Wood.
+
+# 2025-11-27 13:57:13.989622
++2. FIX: Plant Logic (Vine Growth)
++
++Currently, the Plant block is acting like static wood.
++
++Action: Rewrite the else if (cell === 8) block with this 'Vine' behavior:
++
++Thirst: Loop through immediate neighbors (radius 1). If Water (2) is found, turn it to Empty (0) and mark nourished = true.
++
++Growth: If nourished is true, attempt to grow into an adjacent Empty (0) cell.
++
++Direction Bias: Prioritize growing UP (y-1) or Diagonally Up (y-1, x±1) to simulate vines seeking light.
++
++Constraint: Check if there are already too many plant neighbors (>4). If so, do not grow (prevents blobbing).
+
+# 2025-11-27 13:57:13.990208
++2. FIX: Plant Logic (Vine Growth)
++
++Currently, the Plant block is acting like static wood.
++
++Action: Rewrite the else if (cell === 8) block with this 'Vine' behavior:
++
++Thirst: Loop through immediate neighbors (radius 1). If Water (2) is found, turn it to Empty (0) and mark nourished = true.
++
++Growth: If nourished is true, attempt to grow into an adjacent Empty (0) cell.
++
++Direction Bias: Prioritize growing UP (y-1) or Diagonally Up (y-1, x±1) to simulate vines seeking light.
++
++Constraint: Check if there are already too many plant neighbors (>4). If so, do not grow (prevents blobbing).
