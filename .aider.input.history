@@ -1334,3 +1334,53 @@
 +The Victim: At the bottom of the screen, draw a 'Garden': A Stone floor with a pool of Water (2) and several Plants (8).
 +
 +The Result: The user has to ignite the Wood floor to drop the Acid, which will then fall and kill the garden below.
+
+# 2025-11-28 09:14:02.051890
++Please rewrite the code with these specific fixes:
++
++1. FIX: Acid Physics (Wood Immunity)
++
++Inside the Acid corrosion loop (cell === 7), look at the neighbor check: if ((neighbor === 3 || neighbor === 4 || neighbor === 1 || neighbor === 8)...
++
++Action: REMOVE neighbor === 4 (Wood) and neighbor === 3 (Stone).
++
++New Rule: Acid should ONLY eat Sand (1) and Plants (8). It must strictly NOT eat Wood or Stone. This allows us to use Wood as a container that can be burned away.
++
++2. UPDATE: 'Hazard' Scenario
++
++Redraw the 'Hazard' scenario with the proper trap setup:
++
++Container: A U-shaped cup made of Stone (3) walls (Left/Right) floating in the air.
++
++Trapdoor: A Wood (4) floor bridging the stone walls.
++
++Payload: Fill the container with Acid (7).
++
++Target: Draw a 'Garden' at the bottom (Stone floor + Water + Plants) to be destroyed.
++
++This creates a puzzle: The Acid sits safely on the Wood until the user drops Fire on it, burning the floor and releasing the doom.
+
+# 2025-11-28 09:14:02.052309
++Please rewrite the code with these specific fixes:
++
++1. FIX: Acid Physics (Wood Immunity)
++
++Inside the Acid corrosion loop (cell === 7), look at the neighbor check: if ((neighbor === 3 || neighbor === 4 || neighbor === 1 || neighbor === 8)...
++
++Action: REMOVE neighbor === 4 (Wood) and neighbor === 3 (Stone).
++
++New Rule: Acid should ONLY eat Sand (1) and Plants (8). It must strictly NOT eat Wood or Stone. This allows us to use Wood as a container that can be burned away.
++
++2. UPDATE: 'Hazard' Scenario
++
++Redraw the 'Hazard' scenario with the proper trap setup:
++
++Container: A U-shaped cup made of Stone (3) walls (Left/Right) floating in the air.
++
++Trapdoor: A Wood (4) floor bridging the stone walls.
++
++Payload: Fill the container with Acid (7).
++
++Target: Draw a 'Garden' at the bottom (Stone floor + Water + Plants) to be destroyed.
++
++This creates a puzzle: The Acid sits safely on the Wood until the user drops Fire on it, burning the floor and releasing the doom.
