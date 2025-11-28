@@ -56,9 +56,9 @@ export default function FallingSand() {
       const rect = canvas.getBoundingClientRect();
       const x = Math.floor(((e.clientX - rect.left) / canvas.width) * cols);
       const y = Math.floor(((e.clientY - rect.top) / canvas.height) * rows);
-      for (let dy = -brushSize; dy <= brushSize; dy++) {
-        for (let dx = -brushSize; dx <= brushSize; dx++) {
-          if (dx * dx + dy * dy <= brushSize * brushSize) {
+      for (let dy = -brushSizeRef.current; dy <= brushSizeRef.current; dy++) {
+        for (let dx = -brushSizeRef.current; dx <= brushSizeRef.current; dx++) {
+          if (dx * dx + dy * dy <= brushSizeRef.current * brushSizeRef.current) {
             setCell(x + dx, y + dy, selectedMaterialRef.current);
           }
         }
@@ -377,6 +377,10 @@ export default function FallingSand() {
   useEffect(() => {
     selectedMaterialRef.current = selectedMaterial;
   }, [selectedMaterial]);  // keep ref in sync with selectedMaterial
+
+  useEffect(() => {
+    brushSizeRef.current = brushSize;
+  }, [brushSize]);  // sync brushSize to ref
 
 function loadScenario(type: string) {
   if (!gridRef.current || !setCellRef.current) return;
