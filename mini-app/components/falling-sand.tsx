@@ -416,31 +416,41 @@ function loadScenario(type: string) {
       }
     }
   } else if (type === 'Hazard') {
+    // U‑shaped cup made of Stone walls (left/right) floating in the air
     const cupHeight = Math.floor(rows * 0.2);
     const cupWidth = Math.floor(cols * 0.3);
     const startX = Math.floor((cols - cupWidth) / 2);
     const startY = Math.floor(rows * 0.4);
-    // cup walls
+    // left and right walls
     for (let y = startY; y < startY + cupHeight; y++) {
-      for (let x = startX; x < startX + cupWidth; x++) {
-        if (x === startX || x === startX + cupWidth - 1 || y === startY + cupHeight - 1) {
-          setCell(x, y, 3);
-        }
-      }
+      setCell(startX, y, 3); // left wall
+      setCell(startX + cupWidth - 1, y, 3); // right wall
     }
-    // fill with acid
-    for (let y = startY + 1; y < startY + cupHeight - 1; y++) {
+    // wood floor bridging the walls
+    for (let x = startX + 1; x < startX + cupWidth - 1; x++) {
+      setCell(x, startY + cupHeight, 4);
+    }
+    // fill the cup with Acid
+    for (let y = startY + 1; y < startY + cupHeight; y++) {
       for (let x = startX + 1; x < startX + cupWidth - 1; x++) {
         setCell(x, y, 7);
       }
     }
-    // wood legs
-    const legHeight = Math.floor(rows * 0.15);
-    const legWidth = Math.floor(cupWidth / 4);
-    const legPositions = [startX + Math.floor(legWidth / 2), startX + cupWidth - Math.floor(legWidth / 2) - 1];
-    for (const lx of legPositions) {
-      for (let y = startY + cupHeight; y < startY + cupHeight + legHeight; y++) {
-        setCell(lx, y, 4);
+    // Garden at the bottom: stone floor + water + plants
+    const gardenFloorY = rows - 5;
+    for (let x = 0; x < cols; x++) {
+      setCell(x, gardenFloorY, 3); // stone floor
+    }
+    // water pool
+    const waterStartX = Math.floor(cols * 0.3);
+    const waterEndX = Math.floor(cols * 0.7);
+    for (let x = waterStartX; x < waterEndX; x++) {
+      setCell(x, gardenFloorY - 1, 2); // water
+    }
+    // plants on the banks
+    for (let x = waterStartX; x < waterEndX; x++) {
+      if (Math.random() < 0.3) {
+        setCell(x, gardenFloorY - 2, 8); // plant
       }
     }
   } else if (type === 'Oasis') {
