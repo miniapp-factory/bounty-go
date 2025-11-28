@@ -1496,3 +1496,37 @@
 +When this loads, the massive block of Sand should fall, hit the Water, and sink to the bottom, forcing the Water to 'splash' upwards. This showcases the density swapping logic.
 +
 +Please output the updated loadScenario function and the updated JSX for the toolbar.
+
+# 2025-11-28 14:02:31.131535
++The Brush Size slider is broken due to a Stale Closure. The event listener never sees the updated state. Also, the Fire and Acid physics need final adjustments.
++
++Please rewrite the component with these specific fixes:
++
++1. FIX: The Slider (Priority)
++
++Problem: mouseMove uses the initial brushSize (1) forever.
++
++Solution:
++
++Create const brushSizeRef = useRef<number>(1);.
++
++Add a useEffect to sync it: useEffect(() => { brushSizeRef.current = brushSize; }, [brushSize]);.
++
++Update mouseMove: Replace brushSize with brushSizeRef.current in the for-loops and radius check.
+
+# 2025-11-28 14:02:31.131935
++The Brush Size slider is broken due to a Stale Closure. The event listener never sees the updated state. Also, the Fire and Acid physics need final adjustments.
++
++Please rewrite the component with these specific fixes:
++
++1. FIX: The Slider (Priority)
++
++Problem: mouseMove uses the initial brushSize (1) forever.
++
++Solution:
++
++Create const brushSizeRef = useRef<number>(1);.
++
++Add a useEffect to sync it: useEffect(() => { brushSizeRef.current = brushSize; }, [brushSize]);.
++
++Update mouseMove: Replace brushSize with brushSizeRef.current in the for-loops and radius check.
