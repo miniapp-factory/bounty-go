@@ -1384,3 +1384,57 @@
 +Target: Draw a 'Garden' at the bottom (Stone floor + Water + Plants) to be destroyed.
 +
 +This creates a puzzle: The Acid sits safely on the Wood until the user drops Fire on it, burning the floor and releasing the doom.
+
+# 2025-11-28 09:48:38.160036
++The 'Oasis' scenario currently looks like a glitchy sine wave. It needs to look like a natural desert valley with a pool of water.
++
++Please replace the 'Oasis' block inside the loadScenario function with this organic terrain logic:
++
++1. The Terrain (U-Shape Valley):
++
++Instead of a sine wave, calculate the ground height using a Parabola: const dist = Math.abs(x - cols / 2) / (cols / 2); const surfaceY = Math.floor((rows - 10) - (dist * dist * 40) + (Math.random() * 2));
++
++Logic: This creates a deep bottom in the center (rows-10) and high cliffs at the edges (rows-50).
++
++Draw Stone (3) from surfaceY down to rows.
++
++2. The Water (Sea Level):
++
++Define a water level: const waterLevel = rows - 20;
++
++For every column, if the surfaceY (ground) is below the waterLevel (meaning we are in the pit), fill the space between waterLevel and surfaceY with Water (2).
++
++3. The Life (Vegetation):
++
++We want plants on the banks of the oasis, not underwater.
++
++If the ground (surfaceY) is near the water level (e.g., between waterLevel and waterLevel - 5), add a Plant (8) on top of the stone (surfaceY - 1) with a 40% probability.
++
++Please output the updated loadScenario function.
+
+# 2025-11-28 09:48:38.160435
++The 'Oasis' scenario currently looks like a glitchy sine wave. It needs to look like a natural desert valley with a pool of water.
++
++Please replace the 'Oasis' block inside the loadScenario function with this organic terrain logic:
++
++1. The Terrain (U-Shape Valley):
++
++Instead of a sine wave, calculate the ground height using a Parabola: const dist = Math.abs(x - cols / 2) / (cols / 2); const surfaceY = Math.floor((rows - 10) - (dist * dist * 40) + (Math.random() * 2));
++
++Logic: This creates a deep bottom in the center (rows-10) and high cliffs at the edges (rows-50).
++
++Draw Stone (3) from surfaceY down to rows.
++
++2. The Water (Sea Level):
++
++Define a water level: const waterLevel = rows - 20;
++
++For every column, if the surfaceY (ground) is below the waterLevel (meaning we are in the pit), fill the space between waterLevel and surfaceY with Water (2).
++
++3. The Life (Vegetation):
++
++We want plants on the banks of the oasis, not underwater.
++
++If the ground (surfaceY) is near the water level (e.g., between waterLevel and waterLevel - 5), add a Plant (8) on top of the stone (surfaceY - 1) with a 40% probability.
++
++Please output the updated loadScenario function.
