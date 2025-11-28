@@ -34,10 +34,6 @@ export default function FallingSand() {
 
     let dragging = false;
 
-    const getCell = (x: number, y: number) => {
-      if (x < 0 || x >= cols || y < 0 || y >= rows) return 1;
-      return grid[y][x];
-    };
 
     const setCell = (x: number, y: number, val: number) => {
       if (x < 0 || x >= cols || y < 0 || y >= rows) return;
@@ -252,7 +248,6 @@ export default function FallingSand() {
                 }
                 if (combusted) break;
               }
-              if (combusted) continue;
             }
             if (combusted) continue;
             if (Math.random() < 0.05) {
