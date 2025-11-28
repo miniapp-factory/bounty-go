@@ -218,38 +218,41 @@ export default function FallingSand() {
             }
           } else if (cell === 5) {
             // Fire logic
-            let extinguished = false;
-            for (let dy = -1; dy <= 1; dy++) {
-              for (let dx = -1; dx <= 1; dx++) {
-                if (dx === 0 && dy === 0) continue;
-                const nx = x + dx, ny = y + dy;
-                if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
-                if (grid[ny][nx] === 2 && !hasMoved[ny][nx]) {
-                  grid[y][x] = 6;
-                  grid[ny][nx] = 0;
-                  hasMoved[y][x] = true;
-                  hasMoved[ny][nx] = true;
-                  extinguished = true;
-                  break;
+            if (Math.random() < 0.3) {
+              let extinguished = false;
+              for (let dy = -1; dy <= 1; dy++) {
+                for (let dx = -1; dx <= 1; dx++) {
+                  if (dx === 0 && dy === 0) continue;
+                  const nx = x + dx, ny = y + dy;
+                  if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+                  if (grid[ny][nx] === 2 && !hasMoved[ny][nx]) {
+                    grid[y][x] = 6;
+                    grid[ny][nx] = 0;
+                    hasMoved[y][x] = true;
+                    hasMoved[ny][nx] = true;
+                    extinguished = true;
+                    break;
+                  }
                 }
+                if (extinguished) break;
               }
-              if (extinguished) break;
-            }
-            if (extinguished) continue;
-            let combusted = false;
-            for (let dy = -1; dy <= 1; dy++) {
-              for (let dx = -1; dx <= 1; dx++) {
-                if (dx === 0 && dy === 0) continue;
-                const nx = x + dx, ny = y + dy;
-                if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
-                if ((grid[ny][nx] === 4 || grid[ny][nx] === 8) && !hasMoved[ny][nx]) {
-                  grid[ny][nx] = 5;
-                  hasMoved[ny][nx] = true;
-                  combusted = true;
-                  break;
+              if (extinguished) continue;
+              let combusted = false;
+              for (let dy = -1; dy <= 1; dy++) {
+                for (let dx = -1; dx <= 1; dx++) {
+                  if (dx === 0 && dy === 0) continue;
+                  const nx = x + dx, ny = y + dy;
+                  if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+                  if ((grid[ny][nx] === 4 || grid[ny][nx] === 8) && !hasMoved[ny][nx]) {
+                    grid[ny][nx] = 5;
+                    hasMoved[ny][nx] = true;
+                    combusted = true;
+                    break;
+                  }
                 }
+                if (combusted) break;
               }
-              if (combusted) break;
+              if (combusted) continue;
             }
             if (combusted) continue;
             if (Math.random() < 0.05) {
@@ -313,21 +316,23 @@ export default function FallingSand() {
             }
             if (moved) continue;
             // corrosion
-            for (let dy = -1; dy <= 1; dy++) {
-              for (let dx = -1; dx <= 1; dx++) {
-                if (dx === 0 && dy === 0) continue;
-                const nx = x + dx, ny = y + dy;
-                if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
-                const target = grid[ny][nx];
-                if ((target === 1 || target === 8) && !hasMoved[ny][nx]) {
-                  grid[y][x] = 0;
-                  grid[ny][nx] = 0;
-                  hasMoved[y][x] = true;
-                  hasMoved[ny][nx] = true;
-                  break;
+            if (Math.random() < 0.2) {
+              for (let dy = -1; dy <= 1; dy++) {
+                for (let dx = -1; dx <= 1; dx++) {
+                  if (dx === 0 && dy === 0) continue;
+                  const nx = x + dx, ny = y + dy;
+                  if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+                  const target = grid[ny][nx];
+                  if ((target === 1 || target === 8) && !hasMoved[ny][nx]) {
+                    grid[y][x] = 0;
+                    grid[ny][nx] = 0;
+                    hasMoved[y][x] = true;
+                    hasMoved[ny][nx] = true;
+                    break;
+                  }
                 }
+                if (grid[y][x] === 0) break;
               }
-              if (grid[y][x] === 0) break;
             }
           }
         }
@@ -352,14 +357,6 @@ export default function FallingSand() {
           else if (cell === 8) ctx.fillStyle = "#228B22";
           else continue;
           // Set shadow for glowing materials
-          if (cell === 5) {
-            ctx.shadowBlur = 10;
-          } else if (cell === 7) {
-            ctx.shadowBlur = 5;
-          } else {
-            ctx.shadowBlur = 0;
-          }
-          ctx.shadowColor = ctx.fillStyle;
           ctx.fillRect(
             x * cellWidth,
             y * cellHeight,
