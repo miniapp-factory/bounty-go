@@ -1564,3 +1564,25 @@
 +Add a useEffect to sync it: useEffect(() => { brushSizeRef.current = brushSize; }, [brushSize]);.
 +
 +Update mouseMove: Replace brushSize with brushSizeRef.current in the for-loops and radius check.
+
+# 2025-11-28 15:05:42.902528
++. ADD: Visual 'Juice' (Glow Effects)
++
++The rendering is just flat colors. Let's make it look 'Next Gen'.
++
++Action: In the render loop, update ctx.fillStyle for Fire (5), Acid (7), and Water (2) to use hex codes with Shadows.
++
++Implementation: Before drawing the rects, set: ctx.shadowBlur = cell === 5 ? 10 : (cell === 7 ? 5 : 0); ctx.shadowColor = ctx.fillStyle;
++
++Note: Reset ctx.shadowBlur = 0 for non-glowing materials like Stone.
+
+# 2025-11-28 15:05:42.902954
++. ADD: Visual 'Juice' (Glow Effects)
++
++The rendering is just flat colors. Let's make it look 'Next Gen'.
++
++Action: In the render loop, update ctx.fillStyle for Fire (5), Acid (7), and Water (2) to use hex codes with Shadows.
++
++Implementation: Before drawing the rects, set: ctx.shadowBlur = cell === 5 ? 10 : (cell === 7 ? 5 : 0); ctx.shadowColor = ctx.fillStyle;
++
++Note: Reset ctx.shadowBlur = 0 for non-glowing materials like Stone.
