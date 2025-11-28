@@ -1586,3 +1586,69 @@
 +Implementation: Before drawing the rects, set: ctx.shadowBlur = cell === 5 ? 10 : (cell === 7 ? 5 : 0); ctx.shadowColor = ctx.fillStyle;
 +
 +Note: Reset ctx.shadowBlur = 0 for non-glowing materials like Stone.
+
+# 2025-11-28 15:45:49.349904
++The app is lagging because shadowBlur is too expensive for thousands of particles, and the 'Hazard' scenario needs the Sand Castle upgrade we discussed.
++
++Please rewrite the component with these Performance & Content fixes:
++
++1. REMOVE GLOW (Critical Optimization):
++
++Inside the animate render loop, DELETE the lines setting ctx.shadowBlur and ctx.shadowColor.
++
++Reason: This is the main cause of the lag. We will rely on the vibrant colors for visuals instead.
++
++2. OPTIMIZE LOGIC (Throttle Checks):
++
++Fire: Wrap the neighbor spread loop in if (Math.random() < 0.3) { ... }. It doesn't need to scan neighbors every frame.
++
++Acid: Wrap the corrosion loop in if (Math.random() < 0.2) { ... }. This reduces calculations by 80% and makes the melting look more natural/gradual.
++
++3. UPGRADE 'HAZARD' SCENARIO:
++
++Replace the type === 'Hazard' block in loadScenario:
++
++Top: Keep the Stone walls, Wood floor, and Acid fill (Float it in the air).
++
++Bottom: REMOVE the old garden/flat floor.
++
++New Target: Draw a large Sand (1) Pyramid rising from the bottom (rows-1 up to rows-30).
++
++Life: Cover the surface of the Sand Pyramid with Plants (8).
++
++Goal: When the user burns the wood, the Acid drops and chemically dissolves the Sand Castle.
++
++Please output the full, optimized code.
+
+# 2025-11-28 15:45:49.350284
++The app is lagging because shadowBlur is too expensive for thousands of particles, and the 'Hazard' scenario needs the Sand Castle upgrade we discussed.
++
++Please rewrite the component with these Performance & Content fixes:
++
++1. REMOVE GLOW (Critical Optimization):
++
++Inside the animate render loop, DELETE the lines setting ctx.shadowBlur and ctx.shadowColor.
++
++Reason: This is the main cause of the lag. We will rely on the vibrant colors for visuals instead.
++
++2. OPTIMIZE LOGIC (Throttle Checks):
++
++Fire: Wrap the neighbor spread loop in if (Math.random() < 0.3) { ... }. It doesn't need to scan neighbors every frame.
++
++Acid: Wrap the corrosion loop in if (Math.random() < 0.2) { ... }. This reduces calculations by 80% and makes the melting look more natural/gradual.
++
++3. UPGRADE 'HAZARD' SCENARIO:
++
++Replace the type === 'Hazard' block in loadScenario:
++
++Top: Keep the Stone walls, Wood floor, and Acid fill (Float it in the air).
++
++Bottom: REMOVE the old garden/flat floor.
++
++New Target: Draw a large Sand (1) Pyramid rising from the bottom (rows-1 up to rows-30).
++
++Life: Cover the surface of the Sand Pyramid with Plants (8).
++
++Goal: When the user burns the wood, the Acid drops and chemically dissolves the Sand Castle.
++
++Please output the full, optimized code.
