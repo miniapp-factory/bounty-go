@@ -351,6 +351,15 @@ export default function FallingSand() {
           else if (cell === 7) ctx.fillStyle = "#32CD32";
           else if (cell === 8) ctx.fillStyle = "#228B22";
           else continue;
+          // Set shadow for glowing materials
+          if (cell === 5) {
+            ctx.shadowBlur = 10;
+          } else if (cell === 7) {
+            ctx.shadowBlur = 5;
+          } else {
+            ctx.shadowBlur = 0;
+          }
+          ctx.shadowColor = ctx.fillStyle;
           ctx.fillRect(
             x * cellWidth,
             y * cellHeight,
