@@ -1438,3 +1438,61 @@
 +If the ground (surfaceY) is near the water level (e.g., between waterLevel and waterLevel - 5), add a Plant (8) on top of the stone (surfaceY - 1) with a 40% probability.
 +
 +Please output the updated loadScenario function.
+
+# 2025-11-28 10:25:47.881256
++I want to replace the 'Oasis' scenario with a new one called 'Splash' that demonstrates density and displacement physics.
++
++Please rewrite the loadScenario function and the UI with these specific changes:
++
++1. RENAME:
++
++Change the third scenario from 'Oasis' to 'Splash'.
++
++Update the button in the JSX to say 'Splash' (Keep the green color or change to Blue/Yellow).
++
++2. LOGIC: The 'Splash' Setup: Inside loadScenario, replace the type === 'Oasis' block with this:
++
++The Pool (Bottom):
++
++Draw a large Stone (3) basin at the bottom of the screen (e.g., from rows-20 down).
++
++Fill the basin completely with Water (2).
++
++The Drop (Top):
++
++Draw a large, solid 20x20 block (or circle) of Sand (1) suspended in the air at the top center (y=10).
++
++3. THE GOAL:
++
++When this loads, the massive block of Sand should fall, hit the Water, and sink to the bottom, forcing the Water to 'splash' upwards. This showcases the density swapping logic.
++
++Please output the updated loadScenario function and the updated JSX for the toolbar.
+
+# 2025-11-28 10:25:47.881662
++I want to replace the 'Oasis' scenario with a new one called 'Splash' that demonstrates density and displacement physics.
++
++Please rewrite the loadScenario function and the UI with these specific changes:
++
++1. RENAME:
++
++Change the third scenario from 'Oasis' to 'Splash'.
++
++Update the button in the JSX to say 'Splash' (Keep the green color or change to Blue/Yellow).
++
++2. LOGIC: The 'Splash' Setup: Inside loadScenario, replace the type === 'Oasis' block with this:
++
++The Pool (Bottom):
++
++Draw a large Stone (3) basin at the bottom of the screen (e.g., from rows-20 down).
++
++Fill the basin completely with Water (2).
++
++The Drop (Top):
++
++Draw a large, solid 20x20 block (or circle) of Sand (1) suspended in the air at the top center (y=10).
++
++3. THE GOAL:
++
++When this loads, the massive block of Sand should fall, hit the Water, and sink to the bottom, forcing the Water to 'splash' upwards. This showcases the density swapping logic.
++
++Please output the updated loadScenario function and the updated JSX for the toolbar.
