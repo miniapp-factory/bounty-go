@@ -427,7 +427,7 @@ function loadScenario(type: string) {
       }
     }
   } else if (type === 'Hazard') {
-    // U‑shaped cup made of Stone walls (left/right) floating in the air
+    // Stone walls, wood floor, acid fill floating in air
     const cupHeight = Math.floor(rows * 0.2);
     const cupWidth = Math.floor(cols * 0.3);
     const startX = Math.floor((cols - cupWidth) / 2);
@@ -447,21 +447,22 @@ function loadScenario(type: string) {
         setCell(x, y, 7);
       }
     }
-    // Garden at the bottom: stone floor + water + plants
-    const gardenFloorY = rows - 5;
+
+    // Large sand pyramid rising from bottom
+    const pyramidHeight = 30;
+    for (let i = 0; i < pyramidHeight; i++) {
+      const y = rows - 1 - i;
+      const width = cols - 2 * i;
+      const offset = i;
+      for (let x = offset; x < offset + width; x++) {
+        setCell(x, y, 1); // sand
+      }
+    }
+    // Cover surface of pyramid with plants
+    const topY = rows - pyramidHeight;
     for (let x = 0; x < cols; x++) {
-      setCell(x, gardenFloorY, 3); // stone floor
-    }
-    // water pool
-    const waterStartX = Math.floor(cols * 0.3);
-    const waterEndX = Math.floor(cols * 0.7);
-    for (let x = waterStartX; x < waterEndX; x++) {
-      setCell(x, gardenFloorY - 1, 2); // water
-    }
-    // plants on the banks
-    for (let x = waterStartX; x < waterEndX; x++) {
-      if (Math.random() < 0.3) {
-        setCell(x, gardenFloorY - 2, 8); // plant
+      if (grid[topY][x] === 1 && Math.random() < 0.5) {
+        setCell(x, topY, 8);
       }
     }
   } else if (type === 'Splash') {
