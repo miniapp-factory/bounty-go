@@ -1530,3 +1530,37 @@
 +Add a useEffect to sync it: useEffect(() => { brushSizeRef.current = brushSize; }, [brushSize]);.
 +
 +Update mouseMove: Replace brushSize with brushSizeRef.current in the for-loops and radius check.
+
+# 2025-11-28 14:31:11.380813
++The Brush Size slider is broken due to a Stale Closure. The event listener never sees the updated state. Also, the Fire and Acid physics need final adjustments.
++
++Please rewrite the component with these specific fixes:
++
++1. FIX: The Slider (Priority)
++
++Problem: mouseMove uses the initial brushSize (1) forever.
++
++Solution:
++
++Create const brushSizeRef = useRef<number>(1);.
++
++Add a useEffect to sync it: useEffect(() => { brushSizeRef.current = brushSize; }, [brushSize]);.
++
++Update mouseMove: Replace brushSize with brushSizeRef.current in the for-loops and radius check.
+
+# 2025-11-28 14:31:11.381233
++The Brush Size slider is broken due to a Stale Closure. The event listener never sees the updated state. Also, the Fire and Acid physics need final adjustments.
++
++Please rewrite the component with these specific fixes:
++
++1. FIX: The Slider (Priority)
++
++Problem: mouseMove uses the initial brushSize (1) forever.
++
++Solution:
++
++Create const brushSizeRef = useRef<number>(1);.
++
++Add a useEffect to sync it: useEffect(() => { brushSizeRef.current = brushSize; }, [brushSize]);.
++
++Update mouseMove: Replace brushSize with brushSizeRef.current in the for-loops and radius check.
