@@ -453,27 +453,27 @@ function loadScenario(type: string) {
         setCell(x, gardenFloorY - 2, 8); // plant
       }
     }
-  } else if (type === 'Oasis') {
-    // Terrain (U-Shape Valley)
-    for (let x = 0; x < cols; x++) {
-      const dist = Math.abs(x - cols / 2) / (cols / 2);
-      const surfaceY = Math.floor((rows - 10) - (dist * dist * 40) + (Math.random() * 2));
-      // Draw Stone from surfaceY down to rows
-      for (let y = surfaceY; y < rows; y++) {
-        setCell(x, y, 3);
+  } else if (type === 'Splash') {
+    // Pool (Bottom): large stone basin
+    const basinStart = rows - 20;
+    for (let y = basinStart; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        setCell(x, y, 3); // stone
       }
-      // Water level
-      const waterLevel = rows - 20;
-      if (surfaceY < waterLevel) {
-        for (let y = surfaceY; y < waterLevel; y++) {
-          setCell(x, y, 2);
-        }
+    }
+    // Fill basin with water
+    for (let y = basinStart; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        setCell(x, y, 2); // water
       }
-      // Plants on banks
-      if (surfaceY >= waterLevel - 5 && surfaceY <= waterLevel) {
-        if (Math.random() < 0.4) {
-          setCell(x, surfaceY - 1, 8);
-        }
+    }
+    // Drop (Top): 20x20 block of sand at top center
+    const dropSize = 20;
+    const dropStartX = Math.floor((cols - dropSize) / 2);
+    const dropStartY = 10;
+    for (let y = dropStartY; y < dropStartY + dropSize; y++) {
+      for (let x = dropStartX; x < dropStartX + dropSize; x++) {
+        setCell(x, y, 1); // sand
       }
     }
   }
@@ -556,7 +556,7 @@ return (
       <div className="scenario-toolbar fixed top-12 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-white/20 backdrop-blur-md z-50 p-2 rounded-md">
         <button className="btn" style={{backgroundColor:'#ff4500'}} onClick={() => loadScenario('Volcano')}>Volcano</button>
         <button className="btn" style={{backgroundColor:'#8b4513'}} onClick={() => loadScenario('Hazard')}>Hazard</button>
-        <button className="btn" style={{backgroundColor:'#228B22'}} onClick={() => loadScenario('Oasis')}>Oasis</button>
+        <button className="btn" style={{backgroundColor:'#228B22'}} onClick={() => loadScenario('Splash')}>Splash</button>
       </div>
       <button
         className="btn"
