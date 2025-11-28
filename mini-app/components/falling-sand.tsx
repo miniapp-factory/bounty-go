@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function FallingSand() {
   const canvasRef = useRef<HTMLCanvasElement>(null); const [selectedMaterial, setSelectedMaterial] = useState<number>(1); const selectedMaterialRef = useRef<number>(selectedMaterial); const [brushSize, setBrushSize] = useState<number>(1); const animationRef = useRef<number | null>(null);
+  const brushSizeRef = useRef<number>(1);
   const gridRef = useRef<number[][]>([]);
   const setCellRef = useRef<(x: number, y: number, val: number) => void | null>(null);
   const rowsRef = useRef<number>(0);
