@@ -454,19 +454,26 @@ function loadScenario(type: string) {
       }
     }
   } else if (type === 'Oasis') {
-    const valleyDepth = Math.floor(rows * 0.3);
+    // Terrain (U-Shape Valley)
     for (let x = 0; x < cols; x++) {
-      const yBase = Math.floor(rows * 0.7 + Math.sin((x / cols) * Math.PI * 4) * valleyDepth);
-      for (let y = yBase; y < rows; y++) {
+      const dist = Math.abs(x - cols / 2) / (cols / 2);
+      const surfaceY = Math.floor((rows - 10) - (dist * dist * 40) + (Math.random() * 2));
+      // Draw Stone from surfaceY down to rows
+      for (let y = surfaceY; y < rows; y++) {
         setCell(x, y, 3);
       }
-      // water
-      for (let y = yBase + 1; y < yBase + 2; y++) {
-        if (y < rows) setCell(x, y, 2);
+      // Water level
+      const waterLevel = rows - 20;
+      if (surfaceY < waterLevel) {
+        for (let y = surfaceY; y < waterLevel; y++) {
+          setCell(x, y, 2);
+        }
       }
-      // plants on banks
-      if (Math.random() < 0.05) {
-        setCell(x, yBase - 1, 8);
+      // Plants on banks
+      if (surfaceY >= waterLevel - 5 && surfaceY <= waterLevel) {
+        if (Math.random() < 0.4) {
+          setCell(x, surfaceY - 1, 8);
+        }
       }
     }
   }
