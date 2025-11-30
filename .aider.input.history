@@ -1564,3 +1564,33 @@
 +Add a useEffect to sync it: useEffect(() => { brushSizeRef.current = brushSize; }, [brushSize]);.
 +
 +Update mouseMove: Replace brushSize with brushSizeRef.current in the for-loops and radius check.
+
+# 2025-11-30 08:42:08.293647
++I need to implement basic biological behavior for the Plant (ID 8) material, which is currently static.
++
++Please update the animate function by inserting a new logic block immediately after the Acid (cell === 7) section.
++
++Implement this specific logic for cell === 8:
++
++Thirst (Absorption): Iterate through the immediate neighbors (radius 1). If a neighbor is Water (2), turn that water cell to Empty (0) and mark the plant as nourished.
++
++Growth (Expansion): If the plant is nourished, check the neighbors again. If there is an Empty (0) neighbor, use a small probability (e.g., 5%) to spawn a new Plant (8) in that spot.
++
++Safety: Ensure you mark any newly spawned plant as hasMoved = true to prevent infinite growth in a single frame.
++
++Please output the updated animate function with this logic inserted.
+
+# 2025-11-30 08:42:08.294015
++I need to implement basic biological behavior for the Plant (ID 8) material, which is currently static.
++
++Please update the animate function by inserting a new logic block immediately after the Acid (cell === 7) section.
++
++Implement this specific logic for cell === 8:
++
++Thirst (Absorption): Iterate through the immediate neighbors (radius 1). If a neighbor is Water (2), turn that water cell to Empty (0) and mark the plant as nourished.
++
++Growth (Expansion): If the plant is nourished, check the neighbors again. If there is an Empty (0) neighbor, use a small probability (e.g., 5%) to spawn a new Plant (8) in that spot.
++
++Safety: Ensure you mark any newly spawned plant as hasMoved = true to prevent infinite growth in a single frame.
++
++Please output the updated animate function with this logic inserted.
