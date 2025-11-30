@@ -1594,3 +1594,33 @@
 +Safety: Ensure you mark any newly spawned plant as hasMoved = true to prevent infinite growth in a single frame.
 +
 +Please output the updated animate function with this logic inserted.
+
+# 2025-11-30 10:17:17.189874
++I need to implement a 'Steam' mechanic. Currently, Fire and Water don't interact correctly.
++
++Please update the Fire Logic (cell === 5) inside the animate function.
++
++Add this specific interaction rule: Loop through the immediate neighbors. If Fire touches Water (2):
++
++Turn the Water cell into Smoke (6) (simulating evaporation/steam).
++
++Turn the Fire cell into Smoke (6) (extinguished into steam).
++
++Set hasMoved = true for both cells to prevent them from processing again this frame.
++
++Please output the updated animate function with this interaction included.
+
+# 2025-11-30 10:17:17.190335
++I need to implement a 'Steam' mechanic. Currently, Fire and Water don't interact correctly.
++
++Please update the Fire Logic (cell === 5) inside the animate function.
++
++Add this specific interaction rule: Loop through the immediate neighbors. If Fire touches Water (2):
++
++Turn the Water cell into Smoke (6) (simulating evaporation/steam).
++
++Turn the Fire cell into Smoke (6) (extinguished into steam).
++
++Set hasMoved = true for both cells to prevent them from processing again this frame.
++
++Please output the updated animate function with this interaction included.
