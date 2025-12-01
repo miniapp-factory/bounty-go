@@ -349,7 +349,7 @@ export default function FallingSand() {
           else if (cell === 5) ctx.fillStyle = Math.random() < 0.5 ? "#ff4500" : "#ff8c00";
           else if (cell === 6) ctx.fillStyle = "#555555";
           else if (cell === 7) ctx.fillStyle = "#32CD32";
-          else if (cell === 8) ctx.fillStyle = "#228B22";
+          else if (cell === 8) ctx.fillStyle = "#333333";
           else continue;
           ctx.fillRect(
             x * cellWidth,
@@ -545,9 +545,9 @@ return (
       <button
         className={`btn ${selectedMaterial === 8 ? 'selected' : ''}`}
         onClick={() => setSelectedMaterial(8)}
-        style={{ backgroundColor: selectedMaterial === 8 ? '#228B22' : '' }}
+        style={{ backgroundColor: selectedMaterial === 8 ? '#333333' : '' }}
       >
-        Plant
+        Gunpowder
       </button>
       <input
         type="range"
