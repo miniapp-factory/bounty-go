@@ -1624,3 +1624,73 @@
 +Set hasMoved = true for both cells to prevent them from processing again this frame.
 +
 +Please output the updated animate function with this interaction included.
+
+# 2025-12-01 17:23:25.963962
++The Plant logic is too buggy, so we are pivoting to Explosives.
++
++Please rewrite the FallingSand component with these specific changes:
++
++1. REPLACE MATERIAL (ID 8):
++
++Change 'Plant' to 'Gunpowder'.
++
++Color: #333333 (Dark Charcoal).
++
++Button Label: Update the toolbar button to say 'Gunpowder'.
++
++2. GUNPOWDER PHYSICS (ID 8):
++
++Movement: Gunpowder acts exactly like Sand (1). It falls down and piles up on slopes.
++
++Implementation: Copy the Sand movement logic (Down -> Diagonals) exactly.
++
++3. GUNPOWDER REACTION (The Boom):
++
++Trigger: Inside the Gunpowder logic, check immediate neighbors. If any neighbor is Fire (5):
++
++Explode: Turn the current cell AND all neighbors within a 2-cell radius into Fire (5).
++
++This will create a chain reaction that burns through the pile instantly.
++
++4. CLEANUP:
++
++Completely remove the old 'Plant' growth/water drinking logic.
++
++Keep the Acid (Sludge), Water, and Smoke logic as they are.
++
++Output the full, updated code
+
+# 2025-12-01 17:23:25.964492
++The Plant logic is too buggy, so we are pivoting to Explosives.
++
++Please rewrite the FallingSand component with these specific changes:
++
++1. REPLACE MATERIAL (ID 8):
++
++Change 'Plant' to 'Gunpowder'.
++
++Color: #333333 (Dark Charcoal).
++
++Button Label: Update the toolbar button to say 'Gunpowder'.
++
++2. GUNPOWDER PHYSICS (ID 8):
++
++Movement: Gunpowder acts exactly like Sand (1). It falls down and piles up on slopes.
++
++Implementation: Copy the Sand movement logic (Down -> Diagonals) exactly.
++
++3. GUNPOWDER REACTION (The Boom):
++
++Trigger: Inside the Gunpowder logic, check immediate neighbors. If any neighbor is Fire (5):
++
++Explode: Turn the current cell AND all neighbors within a 2-cell radius into Fire (5).
++
++This will create a chain reaction that burns through the pile instantly.
++
++4. CLEANUP:
++
++Completely remove the old 'Plant' growth/water drinking logic.
++
++Keep the Acid (Sludge), Water, and Smoke logic as they are.
++
++Output the full, updated code
