@@ -1694,3 +1694,101 @@
 +Keep the Acid (Sludge), Water, and Smoke logic as they are.
 +
 +Output the full, updated code
+
+# 2025-12-02 15:41:13.989201
++The current file is corrupted (it has duplicate component definitions) and the physics are incomplete.
++
++Please COMPLETELY OVERWRITE components/falling-sand.tsx with a single, clean, optimized version. Do not append code; replace the whole file.
++
++Implement these specific requirements:
++
++1. OPTIMIZATION (Fix Lag):
++
++No Glow: Do NOT use ctx.shadowBlur or ctx.shadowColor anywhere.
++
++Throttling: Wrap the neighbor loops for Fire and Acid in if (Math.random() < 0.4) to reduce CPU load.
++
++2. PHYSICS RULES:
++
++Gunpowder (ID 8):
++
++Explosion First: Check neighbors (radius 1). If touching Fire (5), turn self and neighbors (radius 3) into Fire (5).
++
++Movement Second: If not exploding, copy the Sand (1) movement logic EXACTLY (Gravity + Diagonals). It must fall.
++
++Acid (ID 7):
++
++Crash Fix: First line must be if (y + 1 >= rows) continue;.
++
++Viscosity: Check Down first. If blocked, check Diagonals. Do NOT check sideways.
++
++Corrosion: Eats Sand (1) and Gunpowder (8). Does NOT eat Stone or Wood.
++
++Fire (ID 5): Spreads to Wood/Gunpowder. Extinguished by Water (turns to Smoke). No erratic movement.
++
++Smoke (ID 6): Decays (grid[y][x]=0) with a small probability.
++
++3. SCENARIOS (loadScenario):
++
++'Volcano': Stone mountain drawn from bottom up. Center filled with Fire.
++
++'Hazard': Floating Stone tank with Wood floor, filled with Acid. Target below: A large Sand (1) Pyramid filled with Gunpowder (8).
++
++'Splash': Falling block of Sand into a basin of Water.
++
++4. INPUTS:
++
++Mobile: Add onTouchStart, onTouchMove, onTouchEnd to the canvas (mapped to mouse coordinates).
++
++Slider: Ensure brushSizeRef is used to fix the stale closure bug.
++
++Output the full, error-free code.
+
+# 2025-12-02 15:41:13.989548
++The current file is corrupted (it has duplicate component definitions) and the physics are incomplete.
++
++Please COMPLETELY OVERWRITE components/falling-sand.tsx with a single, clean, optimized version. Do not append code; replace the whole file.
++
++Implement these specific requirements:
++
++1. OPTIMIZATION (Fix Lag):
++
++No Glow: Do NOT use ctx.shadowBlur or ctx.shadowColor anywhere.
++
++Throttling: Wrap the neighbor loops for Fire and Acid in if (Math.random() < 0.4) to reduce CPU load.
++
++2. PHYSICS RULES:
++
++Gunpowder (ID 8):
++
++Explosion First: Check neighbors (radius 1). If touching Fire (5), turn self and neighbors (radius 3) into Fire (5).
++
++Movement Second: If not exploding, copy the Sand (1) movement logic EXACTLY (Gravity + Diagonals). It must fall.
++
++Acid (ID 7):
++
++Crash Fix: First line must be if (y + 1 >= rows) continue;.
++
++Viscosity: Check Down first. If blocked, check Diagonals. Do NOT check sideways.
++
++Corrosion: Eats Sand (1) and Gunpowder (8). Does NOT eat Stone or Wood.
++
++Fire (ID 5): Spreads to Wood/Gunpowder. Extinguished by Water (turns to Smoke). No erratic movement.
++
++Smoke (ID 6): Decays (grid[y][x]=0) with a small probability.
++
++3. SCENARIOS (loadScenario):
++
++'Volcano': Stone mountain drawn from bottom up. Center filled with Fire.
++
++'Hazard': Floating Stone tank with Wood floor, filled with Acid. Target below: A large Sand (1) Pyramid filled with Gunpowder (8).
++
++'Splash': Falling block of Sand into a basin of Water.
++
++4. INPUTS:
++
++Mobile: Add onTouchStart, onTouchMove, onTouchEnd to the canvas (mapped to mouse coordinates).
++
++Slider: Ensure brushSizeRef is used to fix the stale closure bug.
++
++Output the full, error-free code.
