@@ -1792,3 +1792,57 @@
 +Slider: Ensure brushSizeRef is used to fix the stale closure bug.
 +
 +Output the full, error-free code.
+
+# 2025-12-02 16:20:34.377653
++The Gunpowder logic is currently incomplete (it doesn't move or explode properly), and I want to update the 'Hazard' scenario to use it.
++
++1. GUNPOWDER PHYSICS (ID 8):
++
++Step A (Check Explosion): Look at immediate neighbors (radius 1). If any neighbor is Fire (5):
++
++BOOM: Turn the current cell AND all neighbors within a 3-pixel radius into Fire (5).
++
++Set hasMoved = true for all affected cells.
++
++continue (stop processing this cell).
++
++Step B (Gravity): If not exploding, it must fall exactly like Sand (1).
++
++Check Down (y+1). If Empty/Water/Smoke, move there.
++
++If blocked, check Diagonals (y+1, x±1). If Empty/Water/Smoke, move there.
++
++2. SCENARIO UPDATE ('Hazard'):
++
++Keep the floating Acid Tank at the top.
++
++Change the Target: Instead of a Sand/Plant pyramid at the bottom, generate a Gunpowder (8) Pyramid.
++
++Goal: This creates a massive powder keg at the bottom of the screen.
+
+# 2025-12-02 16:20:34.378159
++The Gunpowder logic is currently incomplete (it doesn't move or explode properly), and I want to update the 'Hazard' scenario to use it.
++
++1. GUNPOWDER PHYSICS (ID 8):
++
++Step A (Check Explosion): Look at immediate neighbors (radius 1). If any neighbor is Fire (5):
++
++BOOM: Turn the current cell AND all neighbors within a 3-pixel radius into Fire (5).
++
++Set hasMoved = true for all affected cells.
++
++continue (stop processing this cell).
++
++Step B (Gravity): If not exploding, it must fall exactly like Sand (1).
++
++Check Down (y+1). If Empty/Water/Smoke, move there.
++
++If blocked, check Diagonals (y+1, x±1). If Empty/Water/Smoke, move there.
++
++2. SCENARIO UPDATE ('Hazard'):
++
++Keep the floating Acid Tank at the top.
++
++Change the Target: Instead of a Sand/Plant pyramid at the bottom, generate a Gunpowder (8) Pyramid.
++
++Goal: This creates a massive powder keg at the bottom of the screen.
