@@ -312,22 +312,24 @@ export default function FallingSand() {
               }
             }
             if (moved) continue;
-            // corrosion
-            for (let dy = -1; dy <= 1; dy++) {
-              for (let dx = -1; dx <= 1; dx++) {
-                if (dx === 0 && dy === 0) continue;
-                const nx = x + dx, ny = y + dy;
-                if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
-                const target = grid[ny][nx];
-                if ((target === 1 || target === 8) && !hasMoved[ny][nx]) {
-                  grid[y][x] = 0;
-                  grid[ny][nx] = 0;
-                  hasMoved[y][x] = true;
-                  hasMoved[ny][nx] = true;
-                  break;
+            if (Math.random() < 0.4) {
+              // corrosion
+              for (let dy = -1; dy <= 1; dy++) {
+                for (let dx = -1; dx <= 1; dx++) {
+                  if (dx === 0 && dy === 0) continue;
+                  const nx = x + dx, ny = y + dy;
+                  if (nx < 0 || nx >= cols || ny < 0 || ny >= rows) continue;
+                  const target = grid[ny][nx];
+                  if ((target === 1 || target === 8) && !hasMoved[ny][nx]) {
+                    grid[y][x] = 0;
+                    grid[ny][nx] = 0;
+                    hasMoved[y][x] = true;
+                    hasMoved[ny][nx] = true;
+                    break;
+                  }
                 }
+                if (grid[y][x] === 0) break;
               }
-              if (grid[y][x] === 0) break;
             }
           }
         }
@@ -453,9 +455,11 @@ function loadScenario(type: string) {
       setCell(x, gardenFloorY - 1, 2); // water
     }
     // plants on the banks
-    for (let x = waterStartX; x < waterEndX; x++) {
-      if (Math.random() < 0.3) {
-        setCell(x, gardenFloorY - 2, 8); // plant
+    for (let y = gardenFloorY - 2; y >= gardenFloorY - 6; y--) {
+      const width = (gardenFloorY - y) * 2 + 1;
+      const startX = Math.floor((cols - width) / 2);
+      for (let x = startX; x < startX + width; x++) {
+        setCell(x, y, 8);
       }
     }
   } else if (type === 'Splash') {
