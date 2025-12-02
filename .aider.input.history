@@ -1846,3 +1846,93 @@
 +Change the Target: Instead of a Sand/Plant pyramid at the bottom, generate a Gunpowder (8) Pyramid.
 +
 +Goal: This creates a massive powder keg at the bottom of the screen.
+
+# 2025-12-02 17:02:56.769966
++The Gunpowder logic is still broken; it doesn't fall or pile up correctly. I need to completely replace the cell === 8 block with robust logic.
++
++Please update the animate function by replacing the entire Gunpowder (cell === 8) block with this new logic:
++
++1. Explosion Check (Priority 1):
++
++Scan the 8 immediate neighbors. If ANY neighbor is Fire (5):
++
++Explode: Loop through a radius of 3 around the current cell.
++
++Turn every cell in that radius into Fire (5).
++
++Set hasMoved = true for all affected cells.
++
++continue (stop processing this particle).
++
++2. Movement Physics (Priority 2 - Copy Sand):
++
++If not exploding, the Gunpowder must fall.
++
++Check Down (y+1):
++
++If the cell below is Empty (0), Water (2), or Smoke (6):
++
++Move: Put Gunpowder (8) at [y+1][x].
++
++Swap: Put the displaced material (0, 2, or 6) at [y][x].
++
++Set hasMoved = true for both.
++
++Check Diagonals (y+1, x-1 OR y+1, x+1):
++
++If Down was blocked, check the diagonals randomly.
++
++If a diagonal is Empty (0), Water (2), or Smoke (6):
++
++Move: Put Gunpowder (8) at the diagonal spot.
++
++Swap: Put the displaced material at [y][x].
++
++Set hasMoved = true.
++
++Please write the code for this specific logic block.
+
+# 2025-12-02 17:02:56.770308
++The Gunpowder logic is still broken; it doesn't fall or pile up correctly. I need to completely replace the cell === 8 block with robust logic.
++
++Please update the animate function by replacing the entire Gunpowder (cell === 8) block with this new logic:
++
++1. Explosion Check (Priority 1):
++
++Scan the 8 immediate neighbors. If ANY neighbor is Fire (5):
++
++Explode: Loop through a radius of 3 around the current cell.
++
++Turn every cell in that radius into Fire (5).
++
++Set hasMoved = true for all affected cells.
++
++continue (stop processing this particle).
++
++2. Movement Physics (Priority 2 - Copy Sand):
++
++If not exploding, the Gunpowder must fall.
++
++Check Down (y+1):
++
++If the cell below is Empty (0), Water (2), or Smoke (6):
++
++Move: Put Gunpowder (8) at [y+1][x].
++
++Swap: Put the displaced material (0, 2, or 6) at [y][x].
++
++Set hasMoved = true for both.
++
++Check Diagonals (y+1, x-1 OR y+1, x+1):
++
++If Down was blocked, check the diagonals randomly.
++
++If a diagonal is Empty (0), Water (2), or Smoke (6):
++
++Move: Put Gunpowder (8) at the diagonal spot.
++
++Swap: Put the displaced material at [y][x].
++
++Set hasMoved = true.
++
++Please write the code for this specific logic block.
