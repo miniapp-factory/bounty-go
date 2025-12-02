@@ -1950,3 +1950,65 @@
 +STEP 1: WIPE THE FILE Please DELETE ALL CONTENT in components/falling-sand.tsx. Ignore the current text.
 +
 +STEP 2: WRITE FRESH Write a single, fresh FallingSand component from scratch containing these specific logic rules
+
+# 2025-12-02 20:02:41.796952
++I want to add a 4th scenario called 'Fuse' to showcase chain reactions.
++
++Please update the FallingSand component with these safe changes (do not touch the physics loop):
++
++1. UPDATE: loadScenario function
++
++Add a new block else if (type === 'Fuse').
++
++The Bomb: Draw a large Stone (3) box at the bottom-right of the screen. Fill it completely with Gunpowder (8).
++
++The Fuse: Draw a thin, winding line of Gunpowder (8).
++
++Start from the Bomb (bottom-right).
++
++Go Left across the floor.
++
++Go Up the left wall.
++
++End at a small Wood (4) platform at the top-left.
++
++The Goal: The user lights the wood at the top-left, and watches the fire travel all the way down to the bomb.
++
++2. UPDATE: UI
++
++Add a button for 'Fuse' in the scenario toolbar.
++
++Color: #9370DB (Medium Purple).
++
++Output the updated code.
+
+# 2025-12-02 20:02:41.797372
++I want to add a 4th scenario called 'Fuse' to showcase chain reactions.
++
++Please update the FallingSand component with these safe changes (do not touch the physics loop):
++
++1. UPDATE: loadScenario function
++
++Add a new block else if (type === 'Fuse').
++
++The Bomb: Draw a large Stone (3) box at the bottom-right of the screen. Fill it completely with Gunpowder (8).
++
++The Fuse: Draw a thin, winding line of Gunpowder (8).
++
++Start from the Bomb (bottom-right).
++
++Go Left across the floor.
++
++Go Up the left wall.
++
++End at a small Wood (4) platform at the top-left.
++
++The Goal: The user lights the wood at the top-left, and watches the fire travel all the way down to the bomb.
++
++2. UPDATE: UI
++
++Add a button for 'Fuse' in the scenario toolbar.
++
++Color: #9370DB (Medium Purple).
++
++Output the updated code.
