@@ -485,8 +485,33 @@ function loadScenario(type: string) {
         setCell(x, y, 1); // sand
       }
     }
+  } else if (type === 'Fuse') {
+    // Bomb: large stone box at bottom-right filled with gunpowder
+    const bombSize = 10;
+    const bombStartX = cols - bombSize;
+    const bombStartY = rows - bombSize;
+    for (let y = bombStartY; y < rows; y++) {
+      for (let x = bombStartX; x < cols; x++) {
+        if (y === bombStartY || y === rows - 1 || x === bombStartX || x === cols - 1) {
+          setCell(x, y, 3); // stone walls
+        } else {
+          setCell(x, y, 8); // gunpowder inside
+        }
+      }
+    }
+    // Fuse: thin winding line of gunpowder from bomb to top-left
+    // Left across floor
+    for (let x = bombStartX - 1; x >= 0; x--) {
+      setCell(x, rows - 1, 8);
+    }
+    // Up left wall
+    for (let y = rows - 2; y >= 0; y--) {
+      setCell(0, y, 8);
+    }
+    // Small wood platform at top-left
+    setCell(0, 0, 4);
   }
-}
+  }
 return (
     <>
       <div className="toolbar fixed top-4 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-white/20 backdrop-blur-md z-50 p-2 rounded-md">
@@ -566,6 +591,7 @@ return (
         <button className="btn" style={{backgroundColor:'#ff4500'}} onClick={() => loadScenario('Volcano')}>Volcano</button>
         <button className="btn" style={{backgroundColor:'#8b4513'}} onClick={() => loadScenario('Hazard')}>Hazard</button>
         <button className="btn" style={{backgroundColor:'#228B22'}} onClick={() => loadScenario('Splash')}>Splash</button>
+        <button className="btn" style={{backgroundColor:'#9370DB'}} onClick={() => loadScenario('Fuse')}>Fuse</button>
       </div>
       <button
         className="btn"
